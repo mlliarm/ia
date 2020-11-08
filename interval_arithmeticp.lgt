@@ -3,7 +3,8 @@
     :- public([
         new/3,
         is_in/2,
-        sum/3,
+        add/3,
+        sub/3,
         mul/3,
         div/3
     ])
