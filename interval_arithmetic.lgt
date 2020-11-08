@@ -5,7 +5,7 @@
 		Interval = [Start, End].
 
     	is_in([Xa, Xb], Number) :-
-        	Xa <= Number,
+        	Xa =< Number,
         	Xb >= Number.
 
 	add([Xa, Xb], [Ya, Yb], Sum) :-
