@@ -2,7 +2,7 @@
 
 	:- public(new/3).
 
-    :- public(is_in/2).
+    	:- public(is_in/2).
 
 	:- public(sum/3).
 
