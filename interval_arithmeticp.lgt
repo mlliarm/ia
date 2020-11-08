@@ -7,6 +7,6 @@
         sub/3,
         mul/3,
         div/3
-    ])
+    ]).
 
 :- end_protocol.
