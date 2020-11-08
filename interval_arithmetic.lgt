@@ -29,4 +29,13 @@
 		Zb is 1.0/Ya,
 		mul(X, [Za, Zb], Div).
 
+    mid([Xa, Xb], Mid) :-
+        Mid is (Xb + Xa)/2.0.
+
+    wid([Xa, Xb], Wid) :-
+        Wid is Xb - Xa.
+
+    abs([Xa, Xb], Abs) :-
+        Abs is max(abs(Xa), abs(Xb)).
+
 :- end_object.
