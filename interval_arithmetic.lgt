@@ -4,9 +4,9 @@
 	new(Start, End, Interval) :-
 		Interval = [Start, End].
 
-    is_in([Xa, Xb], Number) :-
-        Xa <= Number,
-        Xb >= Number.
+    	is_in([Xa, Xb], Number) :-
+        	Xa <= Number,
+        	Xb >= Number.
 
 	add([Xa, Xb], [Ya, Yb], Sum) :-
 		Wa is Xa + Ya,
