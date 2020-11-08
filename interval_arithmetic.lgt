@@ -9,19 +9,19 @@
         	Xb >= Number.
 
 	add([Xa, Xb], [Ya, Yb], Sum) :-
-		Wa is Xa + Ya,
-		Wb is Xb + Yb,
-		Sum = [Wa, Wb].
+		Za is Xa + Ya,
+		Zb is Xb + Yb,
+		Sum = [Za, Zb].
 
 	sub([Xa, Xb], [Ya, Yb], Sub) :-
-		Wa is Xa - Yb,
-		Wb is Xb - Ya,
-		Sub = [Wa, Wb].
+		Za is Xa - Yb,
+		Zb is Xb - Ya,
+		Sub = [Za, Zb].
 
 	mul([Xa, Xb], [Ya, Yb], Mul) :-
-		Wa is min(min(Xa*Ya, Xa*Yb), min(Xb*Ya, Xb*Yb)),
-		Wb is max(max(Xa*Ya, Xa*Yb), max(Xb*Ya, Xb*Yb)),
-		Mul = [Wa, Wb].
+		Za is min(min(Xa*Ya, Xa*Yb), min(Xb*Ya, Xb*Yb)),
+		Zb is max(max(Xa*Ya, Xa*Yb), max(Xb*Ya, Xb*Yb)),
+		Mul = [Za, Zb].
 
 	div(X, [Ya, Yb], Div) :-
 		\+is_in([Ya, Yb], 0),
