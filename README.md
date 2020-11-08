@@ -1,5 +1,5 @@
 # ia
-An interval arithmetic library in Logtalk
+An interval arithmetic library in Logtalk.
 
 ## Use
 ### Loading the library
