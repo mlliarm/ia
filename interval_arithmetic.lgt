@@ -24,7 +24,7 @@
 		Mul = [Wa, Wb].
 
 	div(X, [Ya, Yb], Div) :-
-		not(is_in([Ya, Yb], 0)),
+		\+is_in([Ya, Yb], 0),
 		Za is 1.0/Yb,
 		Zb is 1.0/Ya,
 		mul(X, [Za, Zb], Div).
