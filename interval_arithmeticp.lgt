@@ -6,7 +6,10 @@
         add/3,
         sub/3,
         mul/3,
-        div/3
+        div/3,
+        mid/2,
+        wid/2,
+        abs/2
     ]).
 
 :- end_protocol.
