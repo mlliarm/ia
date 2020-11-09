@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Sample tester file
+%  Tester file
 %  Last updated on May 21, 2017
 %
 %  This file is part of Logtalk <https://logtalk.org/>
@@ -20,24 +20,6 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%  This is a sample test suite file to help you get started. Test suite files
-%  are Logtalk source files defining a set of tests. The tests are usually
-%  run with the help of a loader file, usually named "tester.logtalk" or
-%  "tester.lgt", that loads the unit testing framework, the code to be tested,
-%  and the test suite file. See the "tester-sample.lgt" file for details.
-
-%  The unit testing framework can be found in the "tools/lgtunit" directory.
-%  For an overview of its features, see the "tools/lgtunit/NOTES.md" file.
-%  For API details, open the "docs/index.html" file in your web browser.
-%  See also the "testing" example, which illustrates the tests dialects
-%  supported by default by the "lgtunit" tool
-
-
-%  test suite objects are defined as prototypes extending the "lgtunit" object
-%  which implements the unit test framework; parametric objects can be used
-%  in order to define parametrizable tests
-
 :- object(tests,
 	extends(lgtunit)).
 
@@ -53,17 +35,7 @@
         abs/2
     ]).
 
-	% if you want to collect code coverage information, add one clause
-	% for the cover/1 predicate for which entity that should be covered
-	% and compile the code that is being tested in debug mode
-
 	cover(interval_arithmetic).
-
-	% several test dialects are supported with the most simple one being
-	% test/1; its argument is the test name, which must be unique in a
-	% test suite object; the test goal must succeed for the test to be
-	% successful
-
 
     % new/3 tests
 	test(interval_arithmetic_new_3_01, deterministic) :-
@@ -75,8 +47,20 @@
     test(interval_arithmetic_new_3_03, fail) :-
         new(3, 1, _).
 
-	% the "lgtunit" tool supports other, more expressive, test dialects
-	% allowing e.g. testing for expected errors, determinism, defining
-	% setup and cleanup goals, etc; see its documentation for details
+    % is_in/2 tests
+
+    % add/3 tests
+
+    % sub/3 tests
+
+    % mul/3 tests
+
+    % div/3 tests
+
+    % mid/2 tests
+
+    % wid/2 tests
+
+    % abs/2 tests
 
 :- end_object.
