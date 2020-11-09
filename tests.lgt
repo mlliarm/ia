@@ -65,7 +65,7 @@
 	% successful
 
 
-    % Testing new/3
+    % new/3 tests
 	test(interval_arithmetic_new_3_01, deterministic) :-
 		new(1, 2, _).
 
