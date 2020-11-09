@@ -42,7 +42,7 @@
 	% code coverage, which requires compilation in debug mode and collecting
 	% source data information; if code coverage is not required, remove the
 	% "debug(on)" option for faster execution
-	logtalk_load(interval_arithmetic, [source_data(on), debug(on)]),
+	logtalk_load([interval_arithmeticp, interval_arithmetic], [source_data(on), debug(on)]),
 	% compile the unit tests file expanding it using "lgtunit" as the hook
 	% object to preprocess the tests; if you have failing tests, add the
 	% option debug(on) to debug them (see "tools/lgtunit/NOTES.md" for
