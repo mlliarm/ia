@@ -53,6 +53,17 @@
         Sum == [6, 7].
 
     % sub/3 tests
+    test(interval_arithmetic_sub_3_01, deterministic) :-
+        new(1, 2, X),
+        new(3, 4, Y),
+        sub(X, Y, Sub),
+        Sub == [-3, -1].
+
+    test(interval_arithmetic_sub_3_02, fail) :-
+        new(1, 2, X),
+        new(3, 4, Y),
+        sub(X, Y, Sub),
+        Sub == [5, 6].
 
     % mul/3 tests
 
