@@ -35,11 +35,22 @@
         new(1, 3, X),
         is_in(X, 0).
 
-    test(interval_arithmetic_is_in_02_03, fail) :-
+    test(interval_arithmetic_is_in_2_03, fail) :-
         new(1, 3, X),
         is_in(X, 4).
 
     % add/3 tests
+    test(interval_arithmetic_add_3_01, deterministic) :-
+        new(1, 2, X),
+        new(3, 4, Y),
+        add(X, Y, Sum),
+        Sum == [4, 6].
+
+    test(interval_arithmetic_add_3_02, fail) :-
+        new(1, 2, X),
+        new(3, 4, Y),
+        add(X, Y, Sum),
+        Sum == [6, 7].
 
     % sub/3 tests
 
