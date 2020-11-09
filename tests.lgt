@@ -27,6 +27,17 @@
         new(3, 1, _).
 
     % is_in/2 tests
+    test(interval_arithmetic_is_in_2_01, deterministic) :-
+        new(1, 3, X),
+        is_in(X, 2).
+
+    test(interval_arithmetic_is_in_2_02, fail) :-
+        new(1, 3, X),
+        is_in(X, 0).
+
+    test(interval_arithmetic_is_in_02_03, fail) :-
+        new(1, 3, X),
+        is_in(X, 4).
 
     % add/3 tests
 
