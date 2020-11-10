@@ -10,6 +10,13 @@ To load the library simply from inside `swilgt` type:
 ?- {loader}.
 ```
 
+### Run tests
+
+To run the tests type:
+```
+?- {tester}.
+```
+
 ### Examples
 To do.
 
