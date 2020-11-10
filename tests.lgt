@@ -66,6 +66,16 @@
         Sub == [5, 6].
 
     % mul/3 tests
+    test(interval_arthmetic_mul_3_01, deterministic) :-
+        new(1, 2, X),
+        new(3, 4, Y),
+        mul(X, Y, Mul),
+        Mul == [3, 8].
+
+    test(interval_arithmetic_mul_3_02, fail) :-
+        new(1, 2, X),
+        new(3, 4, Y),
+        Mul == [1, 4].
 
     % div/3 tests
 
