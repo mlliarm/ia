@@ -75,6 +75,7 @@
     test(interval_arithmetic_mul_3_02, fail) :-
         new(1, 2, X),
         new(3, 4, Y),
+        mul(X, Y, Mul),
         Mul == [1, 4].
 
     % div/3 tests
