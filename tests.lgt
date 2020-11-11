@@ -79,6 +79,22 @@
         Mul == [1, 4].
 
     % div/3 tests
+    test(interval_arithmetic_div_3_01, deterministic) :-
+        new(1, 2, X),
+        new(4, 5, Y),
+        div(X, Y, Div),
+        Div == [0.2, 0.5].
+
+    test(interval_arithmetic_div_3_02, fail) :-
+        new(1, 2, X),
+        new(4, 5, Y),
+        div(X, Y, Div),
+        Div == [0.2, 0.25].
+
+    test(interval_arithmetic_div_3_03, fail) :-
+        new(1, 2, X),
+        new(-1, 1, Y),
+        div(X, Y, Div).
 
     % mid/2 tests
 
