@@ -22,8 +22,10 @@
 
 	mul([Xa, Xb], [Ya, Yb], Mul) :-
         numberlist::min([Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], Za),
+        Zaa is Za,
         numberlist::max([Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], Zb),
-		Mul = [Za, Zb].
+        Zbb is Zb,
+		Mul = [Zaa, Zbb].
 
 	div(X, [Ya, Yb], Div) :-
 		\+is_in([Ya, Yb], 0),
