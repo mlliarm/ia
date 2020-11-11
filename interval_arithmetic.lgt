@@ -21,10 +21,8 @@
 		Sub = [Za, Zb].
 
 	mul([Xa, Xb], [Ya, Yb], Mul) :-
-        Za is min(min(Xa*Ya, Xa*Yb), min(Xb*Ya, Xb*Yb)),
-        Zb is max(max(Xa*Ya, Xa*Yb), max(Xb*Ya, Xb*Yb)),
-        %min_list([Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], Za),
-        %max_list([Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], Zb),
+        numberlist::min([Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], Za),
+        numberlist::max([Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], Zb),
 		Mul = [Za, Zb].
 
 	div(X, [Ya, Yb], Div) :-
