@@ -1,6 +1,6 @@
 
 :- object(tests,
-	extends(lgtunit)).
+    extends(lgtunit)).
 
     :- uses(interval_arithmetic, [
         new/3,
@@ -14,14 +14,14 @@
         abs/2
     ]).
 
-	cover(interval_arithmetic).
+    cover(interval_arithmetic).
 
     % new/3 tests
-	test(interval_arithmetic_new_3_01, deterministic) :-
-		new(1, 2, _).
+    test(interval_arithmetic_new_3_01, deterministic) :-
+        new(1, 2, _).
 
-	test(interval_arithmetic_new_3_02, fail) :-
-		new(1, 1, _).
+    test(interval_arithmetic_new_3_02, fail) :-
+        new(1, 1, _).
 
     test(interval_arithmetic_new_3_03, fail) :-
         new(3, 1, _).
