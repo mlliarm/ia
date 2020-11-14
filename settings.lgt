@@ -488,19 +488,18 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 %  To print all otherwise silent compiler messages, uncomment the following
 %  lines:
 
-
 :- category(my_verbose_logtalk_message_settings).
 
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
+    :- multifile(logtalk::message_hook/4).
+    :- dynamic(logtalk::message_hook/4).
 
-	logtalk::message_hook(_Message, silent, core, Tokens) :-
-		logtalk::message_prefix_stream(comment, core, Prefix, Stream),
-		logtalk::print_message_tokens(Stream, Prefix, Tokens).
+    logtalk::message_hook(_Message, silent, core, Tokens) :-
+        logtalk::message_prefix_stream(comment, core, Prefix, Stream),
+        logtalk::print_message_tokens(Stream, Prefix, Tokens).
 
-	logtalk::message_hook(_Message, silent(Key), core, Tokens) :-
-		logtalk::message_prefix_stream(comment(Key), core, Prefix, Stream),
-		logtalk::print_message_tokens(Stream, Prefix, Tokens).
+    logtalk::message_hook(_Message, silent(Key), core, Tokens) :-
+        logtalk::message_prefix_stream(comment(Key), core, Prefix, Stream),
+        logtalk::print_message_tokens(Stream, Prefix, Tokens).
 
 :- end_category.
 
