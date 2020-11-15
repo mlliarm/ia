@@ -9,7 +9,10 @@
         div/3,
         mid/2,
         wid/2,
-        abs/2
+        mag/2,
+        mig/2
+        intersection/3,
+        hull/3
     ]).
 
 :- end_protocol.
