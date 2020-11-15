@@ -124,12 +124,12 @@
     % abs/2 tests
     test(interval_arithmetic_mag_2_01, deterministic) :-
         new(-3, 2, X),
-        abs(X, Mag),
+        mag(X, Mag),
         Mag == 3.
 
     test(interval_arithmetic_mag_2_02, fail) :-
         new(-3, 2, X),
-        abs(X, Mag),
+        mag(X, Mag),
         Mag == 2.
 
 :- end_object.
