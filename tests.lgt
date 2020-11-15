@@ -119,5 +119,14 @@
         Wid == 1.
 
     % abs/2 tests
+    test(interval_arithmetic_abs_2_01, deterministic) :-
+        new(-3, 2, X),
+        abs(X, Abs),
+        Abs == 3.
+
+    test(interval_arithmetic_abs_2_02, fail) :-
+        new(-3, 2, X),
+        abs(X, Abs),
+        Abs == 2.
 
 :- end_object.
