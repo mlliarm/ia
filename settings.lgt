@@ -460,34 +460,34 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 %  (you can use in alternative the `report` flag but this flag also affects
 %  source file compilation and loading reports)
 
-/*
+
 :- category(my_terse_logtalk_startup_settings).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
 	% uncomment the next line to suppress the startup banner
-	%logtalk::message_hook(banner, banner, core, _).
+    logtalk::message_hook(banner, banner, core, _).
 
 	% uncomment the next line to suppress the startup printing of default flags
-	%logtalk::message_hook(default_flags, comment(settings), core, _).
+    logtalk::message_hook(default_flags, comment(settings), core, _).
 
 	% uncomment the next line to suppress the startup printing of the loaded settings file
-	%logtalk::message_hook(loaded_settings_file(_), comment(settings), core, _).
+    logtalk::message_hook(loaded_settings_file(_), comment(settings), core, _).
 
 	% uncomment the next line to suppress the startup printing of settings information (except warnings and errors)
-	%logtalk::message_hook(_, comment(settings), core, _).
+    logtalk::message_hook(_, comment(settings), core, _).
 
 	% uncomment the next line to suppress the startup printing on the help tool
-	%logtalk::message_hook(_, comment(help), core, _).
+    logtalk::message_hook(_, comment(help), core, _).
 
 :- end_category.
-%*/
 
 
 %  To print all otherwise silent compiler messages, uncomment the following
 %  lines:
 
+/*
 :- category(my_verbose_logtalk_message_settings).
 
     :- multifile(logtalk::message_hook/4).
@@ -502,4 +502,4 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
         logtalk::print_message_tokens(Stream, Prefix, Tokens).
 
 :- end_category.
-
+%*/
