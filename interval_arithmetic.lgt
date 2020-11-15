@@ -20,9 +20,10 @@
         Sub = [Za, Zb].
 
     mul([Xa, Xb], [Ya, Yb], Mul) :-
-        numberlist::min([Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], Za),
+        S = [Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], 
+        numberlist::min(S, Za),
         Zaa is Za,
-        numberlist::max([Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb], Zb),
+        numberlist::max(S, Zb),
         Zbb is Zb,
         Mul = [Zaa, Zbb].
 
