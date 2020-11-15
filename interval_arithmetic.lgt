@@ -2,8 +2,7 @@
     implements(interval_arithmeticp)).
 
     new(Start, End, Interval) :-
-        Start \= End,
-        Start < End,
+        Start =< End,
         Interval = [Start, End].
 
     is_in([Xa, Xb], Number) :-
