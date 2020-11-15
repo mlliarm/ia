@@ -39,7 +39,7 @@
     wid([Xa, Xb], Wid) :-
         Wid is Xb - Xa.
 
-    abs([Xa, Xb], Abs) :-
-        Abs is max(abs(Xa), abs(Xb)).
+    mag([Xa, Xb], Mag) :-
+        Mag is max(abs(Xa), abs(Xb)).
 
 :- end_object.
