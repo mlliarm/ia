@@ -94,9 +94,18 @@
     test(interval_arithmetic_div_3_03, fail) :-
         new(1, 2, X),
         new(-1, 1, Y),
-        div(X, Y, Div).
+        div(X, Y, _).
 
     % mid/2 tests
+    test(interval_arithmetic_mid_2_01, deterministic) :-
+        new(1, 2, X),
+        mid(X, Mid),
+        number::approximately_equal(Mid, 1.5, 0.01).
+
+    test(interval_arithmetic_mid_2_02, fail) :-
+        new(1, 2, X),
+        mid(X, Mid),
+        number::approximately_equal(Mid, 1.3, 0.01).
 
     % wid/2 tests
 
