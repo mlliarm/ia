@@ -45,4 +45,14 @@
     mig([Xa, Xb], Mig) :-
         Mig is min(abs(Xa), abs(Xb)).
 
+    intersection([Xa, Xb], [Ya, Yb], Inter) :-
+        Za is max(Xa, Ya),
+        Zb is min(Xb, Yb),
+        Inter = [Za, Zb].
+
+    hull([Xa, Xb], [Ya, Yb], Hull) :-
+        Za is min(Xa, Ya),
+        Zb is max(Xb, Yb),
+        Hull = [Za, Zb].
+
 :- end_object.
