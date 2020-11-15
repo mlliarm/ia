@@ -108,6 +108,15 @@
         number::approximately_equal(Mid, 1.3, 0.01).
 
     % wid/2 tests
+    test(interval_arithmetic_wid_2_01, deterministic) :-
+        new(1, 3, X),
+        wid(X, Wid),
+        Wid == 2.
+
+    test(interval_arithmetic_wid_2_02, fail) :-
+        new(1, 3, X),
+        wid(X, Wid),
+        Wid == 1.
 
     % abs/2 tests
 
