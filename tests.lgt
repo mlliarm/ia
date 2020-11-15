@@ -20,7 +20,7 @@
     test(interval_arithmetic_new_3_01, deterministic) :-
         new(1, 2, _).
 
-    test(interval_arithmetic_new_3_02, fail) :-
+    test(interval_arithmetic_new_3_02, deterministic) :-
         new(1, 1, _).
 
     test(interval_arithmetic_new_3_03, fail) :-
@@ -66,7 +66,7 @@
         Sub == [5, 6].
 
     % mul/3 tests
-    test(interval_arthmetic_mul_3_01, deterministic) :-
+    test(interval_arithmetic_mul_3_01, deterministic) :-
         new(1, 2, X),
         new(3, 4, Y),
         mul(X, Y, Mul),
