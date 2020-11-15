@@ -11,7 +11,10 @@
         div/3,
         mid/2,
         wid/2,
-        abs/2
+        mag/2,
+        mig/2,
+        intersection/3,
+        hull/3
     ]).
 
     cover(interval_arithmetic).
@@ -119,14 +122,14 @@
         Wid == 1.
 
     % abs/2 tests
-    test(interval_arithmetic_abs_2_01, deterministic) :-
+    test(interval_arithmetic_mag_2_01, deterministic) :-
         new(-3, 2, X),
-        abs(X, Abs),
-        Abs == 3.
+        abs(X, Mag),
+        Mag == 3.
 
-    test(interval_arithmetic_abs_2_02, fail) :-
+    test(interval_arithmetic_mag_2_02, fail) :-
         new(-3, 2, X),
-        abs(X, Abs),
-        Abs == 2.
+        abs(X, Mag),
+        Mag == 2.
 
 :- end_object.
