@@ -42,4 +42,7 @@
     mag([Xa, Xb], Mag) :-
         Mag is max(abs(Xa), abs(Xb)).
 
+    mig([Xa, Xb], Mig) :-
+        Mig is min(abs(Xa), abs(Xb)).
+
 :- end_object.
