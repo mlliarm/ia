@@ -47,52 +47,52 @@
         new(1, 2, X),
         new(3, 4, Y),
         add(X, Y, Sum),
-        Sum == [4, 6].
+        Sum == (4, 6).
 
     test(interval_arithmetic_add_3_02, fail) :-
         new(1, 2, X),
         new(3, 4, Y),
         add(X, Y, Sum),
-        Sum == [6, 7].
+        Sum == (6, 7).
 
     % sub/3 tests
     test(interval_arithmetic_sub_3_01, deterministic) :-
         new(1, 2, X),
         new(3, 4, Y),
         sub(X, Y, Sub),
-        Sub == [-3, -1].
+        Sub == (-3, -1).
 
     test(interval_arithmetic_sub_3_02, fail) :-
         new(1, 2, X),
         new(3, 4, Y),
         sub(X, Y, Sub),
-        Sub == [5, 6].
+        Sub == (5, 6).
 
     % mul/3 tests
     test(interval_arithmetic_mul_3_01, deterministic) :-
         new(1, 2, X),
         new(3, 4, Y),
         mul(X, Y, Mul),
-        Mul == [3, 8].
+        Mul == (3, 8).
 
     test(interval_arithmetic_mul_3_02, fail) :-
         new(1, 2, X),
         new(3, 4, Y),
         mul(X, Y, Mul),
-        Mul == [1, 4].
+        Mul == (1, 4).
 
     % div/3 tests
     test(interval_arithmetic_div_3_01, deterministic) :-
         new(1, 2, X),
         new(4, 5, Y),
         div(X, Y, Div),
-        Div == [0.2, 0.5].
+        Div == (0.2, 0.5).
 
     test(interval_arithmetic_div_3_02, fail) :-
         new(1, 2, X),
         new(4, 5, Y),
         div(X, Y, Div),
-        Div == [0.2, 0.25].
+        Div == (0.2, 0.25).
 
     test(interval_arithmetic_div_3_03, fail) :-
         new(1, 2, X),
