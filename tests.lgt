@@ -144,15 +144,28 @@
         Mig == 3.
 
     % intersection/3 tests
-    test(interval_arithmetic_intersection_03_01, deterministic) :-
+    test(interval_arithmetic_intersection_3_01, deterministic) :-
         new(1, 2, X),
         new(0, 4, Y),
         intersection(X, Y, Inter),
         Inter == (1, 2).
 
-    test(interval_arithmetic_intersection_03_02, fail) :-
+    test(interval_arithmetic_intersection_3_02, fail) :-
         new(1, 2, X),
         new(3, 4, Y),
         intersection(X, Y, _).
+
+    % hull/3 tests
+    test(interval_arithmetic_hull_3_01, deterministic) :-
+        new(1, 2, X),
+        new(3, 4, Y),
+        hull(X, Y, Hull),
+        Hull == (1, 4).
+
+    test(interval_arithmetic_hull_3_02, deterministic) :-
+        new(1, 2, X),
+        new(0, 4, Y),
+        hull(X, Y, Hull),
+        Hull == (0, 4).
 
 :- end_object.
