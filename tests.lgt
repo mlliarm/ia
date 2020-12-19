@@ -133,6 +133,15 @@
         Mag == 2.
    
     % mig/2 tests
+    test(interval_arithmetic_mig_2_01, deterministic) :-
+        new(-3, 2, X),
+        mig(X, Mig),
+        Mig == 2.
+
+    test(interval_arithmetic_mig_2_02, fail) :-
+        new(-3, 2, X),
+        mig(X, Mig),
+        Mig == 3.
 
     % intersection/3 tests
     test(interval_arithmetic_intersection_03_01, deterministic) :-
