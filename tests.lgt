@@ -121,7 +121,7 @@
         wid(X, Wid),
         Wid == 1.
 
-    % abs/2 tests
+    % mag/2 tests
     test(interval_arithmetic_mag_2_01, deterministic) :-
         new(-3, 2, X),
         mag(X, Mag),
@@ -131,5 +131,19 @@
         new(-3, 2, X),
         mag(X, Mag),
         Mag == 2.
+   
+    % mig/2 tests
+
+    % intersection/3 tests
+    test(interval_arithmetic_intersection_03_01, deterministic) :-
+        new(1, 2, X),
+        new(0, 4, Y),
+        intersection(X, Y, Inter),
+        Inter == (1, 2).
+
+    test(interval_arithmetic_intersection_03_02, fail) :-
+        new(1, 2, X),
+        new(3, 4, Y),
+        intersection(X, Y, _).
 
 :- end_object.
