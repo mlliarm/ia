@@ -15,13 +15,13 @@
     add((Xa, Xb), (Ya, Yb), Sum) :-
         Za is Xa + Ya,
         Zb is Xb + Yb,
-        Sum = (Za, Zb).
+        new(Za, Zb, Sum).
 
     % sub/3, subtracts two intervals.
     sub((Xa, Xb), (Ya, Yb), Sub) :-
         Za is Xa - Yb,
         Zb is Xb - Ya,
-        Sub = (Za, Zb).
+        new(Za, Zb, Sub).
 
     % mul/3, multiplies two intervals.
     mul((Xa, Xb), (Ya, Yb), Mul) :-
@@ -30,7 +30,7 @@
         Zaa is Za,
         numberlist::max(S, Zb),
         Zbb is Zb,
-        Mul = (Zaa, Zbb).
+        new(Zaa, Zbb, Mul).
 
     % div/3, divides two intervals (X/Y)
     %        assuming that 0 isn't included in Y.
