@@ -4,7 +4,7 @@ An interval arithmetic library in Logtalk.
 ## Use
 ### Loading the library
 
-To load the library simply from inside `swilgt` type:
+To load the library simply start Logtalk from the library directory and type:
 
 ```
 ?- {loader}.
