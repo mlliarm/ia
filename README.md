@@ -25,7 +25,7 @@ To run the tests type:
 - [ ] GNU-Prolog 1.4.5 (64 bits), fails ([see issue #11](https://github.com/mlliarm/ia/issues/11)).
 
 ### Examples
-To do.
+[TODO](https://github.com/mlliarm/ia/issues/10#issue-745885381).
 
 ## References
 * R. E. Moore, R. B. Kearfott, M. J. Cloud, Introduction to Interval Analysis, 2009, [(DOI)](https://doi.org/10.1137/1.9780898717716).
