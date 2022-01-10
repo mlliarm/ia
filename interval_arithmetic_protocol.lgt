@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(interval_arithmeticp).
+:- protocol(interval_arithmetic_protocol).
 
 	:- public([
 		new/3,

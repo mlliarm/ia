@@ -20,7 +20,7 @@
 
 
 :- object(interval_arithmetic,
-	implements(interval_arithmeticp)).
+	implements(interval_arithmetic_protocol)).
 
 	% new/3, creates an interval Interval.
 	new(Start, End, Interval) :-
