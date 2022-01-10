@@ -6,7 +6,7 @@
         add/3,
         sub/3,
         mul/3,
-        div/3,
+        (div)/3,
         mid/2,
         wid/2,
         mag/2,
