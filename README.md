@@ -7,14 +7,14 @@ An interval arithmetic library in Logtalk.
 To load the library simply start Logtalk from the library directory and type:
 
 ```
-?- {loader}.
+?- logtalk_load(loader).
 ```
 
 ### Run tests
 
 To run the tests type:
 ```
-?- {tester}.
+?- logtalk_load(tester).
 ```
 
 ### Examples
