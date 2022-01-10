@@ -22,6 +22,13 @@
 :- object(interval_arithmetic,
 	implements(interval_arithmetic_protocol)).
 
+	:- info([
+		version is 0:1:0,
+		author is 'Michail Liarmakopoulos and Paulo Moura',
+		date is 2022-01-10,
+		comment is 'Interval arithmetic library predicates.'
+	]).
+
 	% new/3, creates an interval Interval.
 	new(Start, End, Interval) :-
 		Start =< End,

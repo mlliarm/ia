@@ -22,6 +22,13 @@
 :- object(tests,
 	extends(lgtunit)).
 
+	:- info([
+		version is 0:1:0,
+		author is 'Michail Liarmakopoulos and Paulo Moura',
+		date is 2022-01-10,
+		comment is 'Tests for the interval arithmetic library.'
+	]).
+
 	:- uses(interval_arithmetic, [
 		new/3,
 		is_in/2,
