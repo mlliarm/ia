@@ -4,7 +4,7 @@ An interval arithmetic library in Logtalk.
 ## Use
 ### Loading the library
 
-To load the library simply start Logtalk from the library directory and type:
+To load the library simply start Logtalk ([example](https://logtalk.org/manuals/userman/programming.html#starting-logtalk)) from the library directory and type:
 
 ```
 ?- logtalk_load(loader).
@@ -16,6 +16,13 @@ To run the tests type:
 ```
 ?- logtalk_load(tester).
 ```
+
+### Dependencies
+- Logtalk 3.42.0 (tested).
+
+## Supported Prolog backends
+- [x] SWI-Prolog (threaded, 64 bits, version 7.6.4), ([see](https://github.com/mlliarm/ia/issues/10#issuecomment-1008954629)).
+- [] GNU-Prolog 1.4.5 (64 bits), fails ([see](issue #11)).
 
 ### Examples
 To do.
