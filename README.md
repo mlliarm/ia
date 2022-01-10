@@ -21,8 +21,8 @@ To run the tests type:
 - [x] Logtalk `3.42.0`.
 
 ## Supported Prolog backends
-- [x] SWI-Prolog (threaded, 64 bits, version 8.5.5-3-gb856d332c-DIRTY), works ([see issue #10](https://github.com/mlliarm/ia/issues/10#issuecomment-1009255385)).
-- [x] GNU-Prolog 1.5.0 (64 bits), works ([see issue #10](https://github.com/mlliarm/ia/issues/10#issuecomment-1009268552)).
+- [x] SWI-Prolog (threaded, 64 bits, version 8.5.5-3-gb856d332c-DIRTY), works ([see](https://github.com/mlliarm/ia/issues/10#issuecomment-1009255385)).
+- [x] GNU-Prolog 1.5.0 (64 bits), works ([see](https://github.com/mlliarm/ia/issues/10#issuecomment-1009268552)).
 
 ### Examples
 [TODO](https://github.com/mlliarm/ia/issues/10#issue-745885381).
