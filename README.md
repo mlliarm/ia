@@ -18,12 +18,11 @@ To run the tests type:
 ```
 
 ### Dependencies
-- Logtalk 3.42.0.
+- [x] Logtalk `3.42.0`.
 
 ## Supported Prolog backends
 - [x] SWI-Prolog (threaded, 64 bits, version 7.6.4), works ([see issue #10](https://github.com/mlliarm/ia/issues/10#issuecomment-1008954629)).
-
-- [] GNU-Prolog 1.4.5 (64 bits), fails ([see issue #11](https://github.com/mlliarm/ia/issues/11)).
+- [ ] GNU-Prolog 1.4.5 (64 bits), fails ([see issue #11](https://github.com/mlliarm/ia/issues/11)).
 
 ### Examples
 To do.
