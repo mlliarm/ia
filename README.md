@@ -31,7 +31,7 @@ To run the tests type:
 1. R. E. Moore, R. B. Kearfott, M. J. Cloud, Introduction to Interval Analysis, 2009, [(DOI)](https://doi.org/10.1137/1.9780898717716).
 2. E. Hansen, Global Optimization using Interval Analysis, 2003, [(Amazon)](https://www.amazon.com/Global-Optimization-Using-Interval-Analysis/dp/0824740599).
 3. A. Neumaier, Interval Methods for Systems of Equations, 2009, [(DOI)](https://doi.org/10.1017/CBO9780511526473).
-4. D. Ratz, Inclusion isotone extended interval arithmetic. A toolbox update, 1997 [(DOI), open access](https://publikationen.bibliothek.kit.edu/67997).
+4. D. Ratz, Inclusion isotone extended interval arithmetic. A toolbox update, 1997 [(DOI, open access)](https://publikationen.bibliothek.kit.edu/67997).
 5. S. P. Shary, Randomized algorithms in interval global optimization, 2008, [(DOI)](https://doi.org/10.1134/S1995423908040083).
 
 ## Contributors
