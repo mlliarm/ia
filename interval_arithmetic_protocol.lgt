@@ -34,7 +34,7 @@
 		add/3,
 		subtract/3,
 		multiply/3,
-		(div)/3,
+		divide/3,
 		midpoint/2,
 		width/2,
 		magnitude/2,

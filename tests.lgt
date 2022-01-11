@@ -35,7 +35,7 @@
 		add/3,
 		subtract/3,
 		multiply/3,
-		(div)/3,
+		divide/3,
 		midpoint/2,
 		width/2,
 		magnitude/2,
@@ -105,22 +105,22 @@
 		multiply(X, Y, Mul),
 		Mul == (1, 4).
 
-	% div/3 tests
-	test(interval_arithmetic_div_3_01, deterministic(Div == (0.2, 0.5))) :-
+	% divide/3 tests
+	test(interval_arithmetic_divide_3_01, deterministic(Div == (0.2, 0.5))) :-
 		new(1, 2, X),
 		new(4, 5, Y),
-		div(X, Y, Div).
+		divide(X, Y, Div).
 
-	test(interval_arithmetic_div_3_02, fail) :-
+	test(interval_arithmetic_divide_3_02, fail) :-
 		new(1, 2, X),
 		new(4, 5, Y),
-		div(X, Y, Div),
+		divide(X, Y, Div),
 		Div == (0.2, 0.25).
 
-	test(interval_arithmetic_div_3_03, fail) :-
+	test(interval_arithmetic_divide_3_03, fail) :-
 		new(1, 2, X),
 		new(-1, 1, Y),
-		div(X, Y, _).
+		divide(X, Y, _).
 
 	% midpoint/2 tests
 	test(interval_arithmetic_midpoint_2_01, deterministic) :-

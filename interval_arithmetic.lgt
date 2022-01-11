@@ -32,6 +32,7 @@
 	:- alias(interval_arithmetic_protocol, [
 		subtract/3  as sub/3,
 		multiply/3  as mul/3,
+		divide/3    as (div)/3,
 		midpoint/2  as mid/2,
 		width/2     as wid/2,
 		magnitude/2 as mag/2,
@@ -87,9 +88,9 @@
 		Zbb is Zb,
 		new(Zaa, Zbb, Mul).
 
-	% div/3, divides two intervals (X/Y)
+	% divide/3, divides two intervals (X/Y)
 	%		assuming that 0 isn't included in Y.
-	div(X, (Ya, Yb), Div) :-
+	divide(X, (Ya, Yb), Div) :-
 		\+is_in((Ya, Yb), 0),
 		Za is 1.0/Yb,
 		Zb is 1.0/Ya,
