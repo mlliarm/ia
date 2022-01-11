@@ -22,9 +22,9 @@
 :- protocol(interval_arithmetic_protocol).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-10,
+		date is 2022-01-11,
 		comment is 'Interval arithmetic protocol.'
 	]).
 
@@ -32,13 +32,13 @@
 		new/3,
 		is_in/2,
 		add/3,
-		sub/3,
-		mul/3,
+		subtract/3,
+		multiply/3,
 		(div)/3,
-		mid/2,
-		wid/2,
-		mag/2,
-		mig/2,
+		midpoint/2,
+		width/2,
+		magnitude/2,
+		mignitude/2,
 		intersection/3,
 		hull/3
 	]).

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-10,
+		date is 2022-01-11,
 		comment is 'Tests for the interval arithmetic library.'
 	]).
 
@@ -33,13 +33,13 @@
 		new/3,
 		is_in/2,
 		add/3,
-		sub/3,
-		mul/3,
+		subtract/3,
+		multiply/3,
 		(div)/3,
-		mid/2,
-		wid/2,
-		mag/2,
-		mig/2,
+		midpoint/2,
+		width/2,
+		magnitude/2,
+		mignitude/2,
 		intersection/3,
 		hull/3
 	]).
@@ -81,28 +81,28 @@
 		add(X, Y, Sum),
 		Sum == (6, 7).
 
-	% sub/3 tests
-	test(interval_arithmetic_sub_3_01, deterministic(Sub == (-3, -1))) :-
+	% subtract/3 tests
+	test(interval_arithmetic_subtract_3_01, deterministic(Sub == (-3, -1))) :-
 		new(1, 2, X),
 		new(3, 4, Y),
-		sub(X, Y, Sub).
+		subtract(X, Y, Sub).
 
-	test(interval_arithmetic_sub_3_02, fail) :-
+	test(interval_arithmetic_subtract_3_02, fail) :-
 		new(1, 2, X),
 		new(3, 4, Y),
-		sub(X, Y, Sub),
+		subtract(X, Y, Sub),
 		Sub == (5, 6).
 
-	% mul/3 tests
-	test(interval_arithmetic_mul_3_01, deterministic(Mul == (3, 8))) :-
+	% multiply/3 tests
+	test(interval_arithmetic_multiply_3_01, deterministic(Mul == (3, 8))) :-
 		new(1, 2, X),
 		new(3, 4, Y),
-		mul(X, Y, Mul).
+		multiply(X, Y, Mul).
 
-	test(interval_arithmetic_mul_3_02, fail) :-
+	test(interval_arithmetic_multiply_3_02, fail) :-
 		new(1, 2, X),
 		new(3, 4, Y),
-		mul(X, Y, Mul),
+		multiply(X, Y, Mul),
 		Mul == (1, 4).
 
 	% div/3 tests
@@ -122,45 +122,45 @@
 		new(-1, 1, Y),
 		div(X, Y, _).
 
-	% mid/2 tests
-	test(interval_arithmetic_mid_2_01, deterministic) :-
+	% midpoint/2 tests
+	test(interval_arithmetic_midpoint_2_01, deterministic) :-
 		new(1, 2, X),
-		mid(X, Mid),
+		midpoint(X, Mid),
 		number::approximately_equal(Mid, 1.5, 0.01).
 
-	test(interval_arithmetic_mid_2_02, fail) :-
+	test(interval_arithmetic_midpoint_2_02, fail) :-
 		new(1, 2, X),
-		mid(X, Mid),
+		midpoint(X, Mid),
 		number::approximately_equal(Mid, 1.3, 0.01).
 
-	% wid/2 tests
-	test(interval_arithmetic_wid_2_01, deterministic(Wid == 2)) :-
+	% width/2 tests
+	test(interval_arithmetic_width_2_01, deterministic(Wid == 2)) :-
 		new(1, 3, X),
-		wid(X, Wid).
+		width(X, Wid).
 
-	test(interval_arithmetic_wid_2_02, fail) :-
+	test(interval_arithmetic_width_2_02, fail) :-
 		new(1, 3, X),
-		wid(X, Wid),
+		width(X, Wid),
 		Wid == 1.
 
-	% mag/2 tests
-	test(interval_arithmetic_mag_2_01, deterministic(Mag == 3)) :-
+	% magnitude/2 tests
+	test(interval_arithmetic_magnitude_2_01, deterministic(Mag == 3)) :-
 		new(-3, 2, X),
-		mag(X, Mag).
+		magnitude(X, Mag).
 
-	test(interval_arithmetic_mag_2_02, fail) :-
+	test(interval_arithmetic_magnitude_2_02, fail) :-
 		new(-3, 2, X),
-		mag(X, Mag),
+		magnitude(X, Mag),
 		Mag == 2.
 
-	% mig/2 tests
-	test(interval_arithmetic_mig_2_01, deterministic(Mig == 2)) :-
+	% mignitude/2 tests
+	test(interval_arithmetic_mignitude_2_01, deterministic(Mig == 2)) :-
 		new(-3, 2, X),
-		mig(X, Mig).
+		mignitude(X, Mig).
 
-	test(interval_arithmetic_mig_2_02, fail) :-
+	test(interval_arithmetic_mignitude_2_02, fail) :-
 		new(-3, 2, X),
-		mig(X, Mig),
+		mignitude(X, Mig),
 		Mig == 3.
 
 	% intersection/3 tests

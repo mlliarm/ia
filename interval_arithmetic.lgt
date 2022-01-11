@@ -23,11 +23,38 @@
 	implements(interval_arithmetic_protocol)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:2:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-10,
+		date is 2022-01-11,
 		comment is 'Interval arithmetic library predicates.'
 	]).
+
+	:- alias(interval_arithmetic_protocol, [
+		subtract/3  as sub/3,
+		multiply/3  as mul/3,
+		midpoint/2  as mid/2,
+		width/2     as wid/2,
+		magnitude/2 as mag/2,
+		mignitude/2 as mig/2
+	]).
+
+	sub(Interval1, Interval2, Interval) :-
+		subtract(Interval1, Interval2, Interval).
+
+	mul(Interval1, Interval2, Interval) :-
+		multiply(Interval1, Interval2, Interval).
+
+	mid(Interval, Midpoint) :-
+		midpoint(Interval, Midpoint).
+
+	wid(Interval, Width) :-
+		width(Interval, Width).
+
+	mag(Interval, Magnitude) :-
+		magnitude(Interval, Magnitude).
+
+	mig(Interval, Mignitude) :-
+		mignitude(Interval, Mignitude).
 
 	% new/3, creates an interval Interval.
 	new(Start, End, Interval) :-
@@ -45,14 +72,14 @@
 		Zb is Xb + Yb,
 		new(Za, Zb, Sum).
 
-	% sub/3, subtracts two intervals.
-	sub((Xa, Xb), (Ya, Yb), Sub) :-
+	% subtract/3, subtracts two intervals.
+	subtract((Xa, Xb), (Ya, Yb), Sub) :-
 		Za is Xa - Yb,
 		Zb is Xb - Ya,
 		new(Za, Zb, Sub).
 
 	% mul/3, multiplies two intervals.
-	mul((Xa, Xb), (Ya, Yb), Mul) :-
+	multiply((Xa, Xb), (Ya, Yb), Mul) :-
 		S = [Xa*Ya, Xa*Yb, Xb*Ya, Xb*Yb],
 		numberlist::min(S, Za),
 		Zaa is Za,
@@ -68,20 +95,20 @@
 		Zb is 1.0/Ya,
 		mul(X, (Za, Zb), Div).
 
-	% mid/2, calculates the midpoint of an interval (Xa, Xb).
-	mid((Xa, Xb), Mid) :-
+	% midpoint/2, calculates the midpoint of an interval (Xa, Xb).
+	midpoint((Xa, Xb), Mid) :-
 		Mid is (Xb + Xa)/2.0.
 
-	% wid/2, calculates the width of an interval.
-	wid((Xa, Xb), Wid) :-
+	% width/2, calculates the width of an interval.
+	width((Xa, Xb), Wid) :-
 		Wid is Xb - Xa.
 
-	% mag/2, calculates the magnitude (absolute value) of an interval.
-	mag((Xa, Xb), Mag) :-
+	% magnitude/2, calculates the magnitude (absolute value) of an interval.
+	magnitude((Xa, Xb), Mag) :-
 		Mag is max(abs(Xa), abs(Xb)).
 
-	% mig/2, calculates the mignitude of an interval.
-	mig((Xa, Xb), Mig) :-
+	% mignitude/2, calculates the mignitude of an interval.
+	mignitude((Xa, Xb), Mig) :-
 		Mig is min(abs(Xa), abs(Xb)).
 
 	% intersection/3, calculates the intersection of two intervals.
