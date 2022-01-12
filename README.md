@@ -18,14 +18,18 @@ To run the tests type:
 ```
 
 ### Dependencies
-- [x] Logtalk `3.42.0`.
+- [x] Logtalk `3.52.0-1`.
 
 ## Supported Prolog backends
 - [x] SWI-Prolog (threaded, 64 bits, version 8.5.5-3-gb856d332c-DIRTY), works ([see](https://github.com/mlliarm/ia/issues/10#issuecomment-1009255385)).
 - [x] GNU-Prolog 1.5.0 (64 bits), works ([see](https://github.com/mlliarm/ia/issues/10#issuecomment-1009268552)).
 
 ## Know issues
-Ciao Prolog (tested with version 1.20.0) cannot be used due to lack of support for the `min/2` and `max/2` arithmetic functions.
+- Ciao Prolog (tested with version 1.20.0) cannot be used due to lack of support for the `min/2` and `max/2` arithmetic functions.
+
+## Code coverage
+- `Entity coverage:` 1/1 (100%).
+- `Clause coverage`: 13/18 (72.2%), see [issue #7](https://github.com/mlliarm/ia/issues/7#issuecomment-1011539142).
 
 ### Examples
 [TODO](https://github.com/mlliarm/ia/issues/10#issue-745885381).
