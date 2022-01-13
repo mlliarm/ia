@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-11,
+		date is 2022-01-13,
 		comment is 'Tests for the interval arithmetic library.'
 	]).
 
