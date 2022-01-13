@@ -24,7 +24,7 @@
 	:- info([
 		version is 0:3:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-11,
+		date is 2022-01-13,
 		comment is 'Interval arithmetic protocol.'
 	]).
 
@@ -77,12 +77,41 @@
 		argnames is ['Interval1', 'Interval2', 'Hull']
 	]).
 
-	:- public([
-		is_in/2,
-		add/3,
-		subtract/3,
-		multiply/3,
-		divide/3
+	% TODO: not sure about the '-boolean'. Couldn't find in the docs the name of the boolean type.
+	%       kindly assist :).
+	:- public(is_in/2).
+	:- mode(is_in(@interval, @number, -bool), zero_or_one).
+	:- info(is_in/2, [
+		comment is 'Checks if a number Number is included in the closed interval (Xa, Xb).',
+		argnames is ['Interval', 'Number']
+	]).
+
+	:- public(add/3).
+	:- mode(add(@interval, @interval, -interval), zero_or_one).
+	:- info(add/3, [
+		comment is 'Adds two intervals.',
+		argnames is ['Interval1', 'Interval2', 'Sum']
+	]).
+
+	:- public(subtract/3).
+	:- mode(subtract(@interval, @interval, -interval), zero_or_one).
+	:- info(subtract/3, [
+		comment is 'Subtracts two intervals.',
+		argnames is ['Interval1', 'Interval2', 'Sub']
+	]).
+
+	:- public(multiply/3).
+	:- mode(multiply(@interval, @interval, -interval), zero_or_one).
+	:- info(multiply/3, [
+		comment is 'Multiplies two intervals.',
+		argnames is ['Interval1', 'Interval2', 'Mul']
+	]).
+
+	:- public(divide/3).
+	:- mode(divide(@interval, @interval, -interval), zero_or_one).
+	:- info(divide/3, [
+		comment is 'Divides two intervals (X/Y) assuming that 0 isn\'t included in Y. Fails if Y includes 0.',
+		argnames is ['Interval1', 'Interval2', 'Div']
 	]).
 
 :- end_protocol.
