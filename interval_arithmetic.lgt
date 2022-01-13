@@ -23,9 +23,9 @@
 	implements(interval_arithmetic_protocol)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-11,
+		date is 2022-01-13,
 		comment is 'Interval arithmetic library predicates.'
 	]).
 
@@ -44,6 +44,9 @@
 
 	mul(Interval1, Interval2, Interval) :-
 		multiply(Interval1, Interval2, Interval).
+
+	div(Interval1, Interval2, Interval) :-
+		divide(Interval1, Interval2, Interval).
 
 	mid(Interval, Midpoint) :-
 		midpoint(Interval, Midpoint).
