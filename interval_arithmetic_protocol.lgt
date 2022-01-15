@@ -22,9 +22,9 @@
 :- protocol(interval_arithmetic_protocol).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-13,
+		date is 2022-01-15,
 		comment is 'Interval arithmetic protocol.'
 	]).
 
@@ -77,13 +77,11 @@
 		argnames is ['Interval1', 'Interval2', 'Hull']
 	]).
 
-	% TODO: not sure about the '-boolean'. Couldn't find in the docs the name of the boolean type.
-	%       kindly assist :).
 	:- public(is_in/2).
-	:- mode(is_in(@interval, @number, -bool), zero_or_one).
+	:- mode(is_in(@number, @interval), zero_or_one).
 	:- info(is_in/2, [
-		comment is 'Checks if a number Number is included in the closed interval (Xa, Xb).',
-		argnames is ['Interval', 'Number']
+		comment is 'Checks if a number is included in the closed interval (Xa, Xb).',
+		argnames is ['Number', 'Interval']
 	]).
 
 	:- public(add/3).

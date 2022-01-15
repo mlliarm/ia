@@ -23,9 +23,9 @@
 	implements(interval_arithmetic_protocol)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-13,
+		date is 2022-01-15,
 		comment is 'Interval arithmetic library predicates.'
 	]).
 
@@ -36,7 +36,8 @@
 		midpoint/2  as mid/2,
 		width/2     as wid/2,
 		magnitude/2 as mag/2,
-		mignitude/2 as mig/2
+		mignitude/2 as mig/2,
+		intersection/3 as inter/3
 	]).
 
 	sub(Interval1, Interval2, Interval) :-
@@ -60,13 +61,16 @@
 	mig(Interval, Mignitude) :-
 		mignitude(Interval, Mignitude).
 
+	inter(Interval1, Interval2, Interval) :-
+		intersection(Interval1, Interval2, Interval).
+
 	% new/3, creates an interval Interval.
 	new(Start, End, Interval) :-
 		Start =< End,
 		Interval = (Start, End).
 
 	% is_in/2, returns if a number Number is included in a closed interval (Xa, Xb).
-	is_in((Xa, Xb), Number) :-
+	is_in(Number, (Xa, Xb)) :-
 		Xa =< Number,
 		Xb >= Number.
 
@@ -94,7 +98,7 @@
 	% divide/3, divides two intervals (X/Y)
 	%		assuming that 0 isn't included in Y.
 	divide(X, (Ya, Yb), Div) :-
-		\+is_in((Ya, Yb), 0),
+		\+ is_in(0, (Ya, Yb)),
 		Za is 1.0/Yb,
 		Zb is 1.0/Ya,
 		mul(X, (Za, Zb), Div).
