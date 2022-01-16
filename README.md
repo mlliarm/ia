@@ -46,12 +46,11 @@ To run the tests type:
 
 ## Know issues
 - Ciao Prolog (tested with version 1.20.0) cannot be used due to lack of support for the `min/2` and `max/2` arithmetic functions.
-- When running `{loader}.`, I keep getting the warning `Missing scope directive for predicate: is_in/3
-`. Not sure why.
 
 ## Code coverage
-- `Entity coverage:` 1/1 (100%).
-- `Clause coverage`: 13/19 (68.42%).
+- 1 entity declared as covered containing 20 clauses.
+    - 1 out of 1 entity covered, `100.000000% entity coverage`.
+    - 20 out of 20 clauses covered, `100.000000% clause coverage`.
 
 ### Examples
 [TODO](https://github.com/mlliarm/ia/issues/10#issue-745885381).
