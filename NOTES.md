@@ -72,7 +72,7 @@ All examples have been taken from the book of R. E. Moore et al (see the first r
 3. A. Neumaier, Interval Methods for Systems of Equations, 1990, ([DOI](https://doi.org/10.1017/CBO9780511526473)).
 4. D. Ratz, Inclusion isotone extended interval arithmetic. A toolbox update, 1997 ([DOI](https://publikationen.bibliothek.kit.edu/67997), [PDF](https://publikationen.bibliothek.kit.edu/67997/2183)).
 5. S. P. Shary, Randomized algorithms in interval global optimization, 2008, ([DOI](https://doi.org/10.1134/S1995423908040083), [PDF from author's site](http://www.nsc.ru/interval/shary/Papers/InRandAlgs.pdf)).
-6. R.B. Kearfott, M.T. Nakao, Arnold Neumaier, S.M. Rump, S. P. Shary, P. Van Hentenryck, Standardized notation in interval analysis, Вычислительные технологии. 2010. Т. 15. № 1. С. 7-13 , ([Full article](https://web.archive.org/web/20220115215222/https://www.tuhh.de/ti3/paper/rump/KeNaNeRuShHe10.pdf),[link to the magazine published)](https://web.archive.org/web/20220115215444/http://www.ict.nsc.ru/jct/annotation/1345)).
+6. R.B. Kearfott, M.T. Nakao, Arnold Neumaier, S.M. Rump, S. P. Shary, P. Van Hentenryck, Standardized notation in interval analysis, Вычислительные технологии. 2010. Т. 15. № 1. С. 7-13 , ([PDF](https://web.archive.org/web/20220115215222/https://www.tuhh.de/ti3/paper/rump/KeNaNeRuShHe10.pdf),[link to the journal published)](https://web.archive.org/web/20220115215444/http://www.ict.nsc.ru/jct/annotation/1345)).
 
 ## Contributors
 See [CONTRIBUTORS](CONTRIBUTORS.md).
