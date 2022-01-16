@@ -53,8 +53,19 @@ To run the tests type:
     - 20 out of 20 clauses covered, `100.000000% clause coverage`.
 
 ### Examples
-[TODO](https://github.com/mlliarm/ia/issues/10#issue-745885381).
 
+All examples have been taken from the book of R. E. Moore et al (see the first reference).
+
+#### Introduction
+- TBD
+
+#### The Interval Arithmetic System
+- TBD
+
+#### First Applications
+- TBD
+
+---
 ## References
 1. R. E. Moore, R. B. Kearfott, M. J. Cloud, Introduction to Interval Analysis, 2009, [(DOI)](https://doi.org/10.1137/1.9780898717716).
 2. E. Hansen, Global Optimization using Interval Analysis, 2003, [(Amazon)](https://www.amazon.com/Global-Optimization-Using-Interval-Analysis/dp/0824740599).
