@@ -1,6 +1,8 @@
 ________________________________________________________________________
 Copyright 2020-2022 Michail Liarmakopoulos <mlliarm@yandex.com>
+
 Copyright 2020-2022 Paulo Moura <pmoura@logtalk.org>
+
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
