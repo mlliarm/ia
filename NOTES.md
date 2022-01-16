@@ -56,13 +56,13 @@ To run the tests type:
 
 All examples have been taken from the book of R. E. Moore et al (see the first reference).
 
-#### Introduction
+#### 1. Introduction
 - TBD
 
-#### The Interval Arithmetic System
+#### 2. The Interval Arithmetic System
 - TBD
 
-#### First Applications
+#### 3. First Applications
 - TBD
 
 ---
