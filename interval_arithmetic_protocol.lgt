@@ -22,9 +22,9 @@
 :- protocol(interval_arithmetic_protocol).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-15,
+		date is 2022-01-19,
 		comment is 'Interval arithmetic protocol.'
 	]).
 
