@@ -177,7 +177,7 @@
 		Mag == 2.
 
 	% mig/2 tests
-	test(interval_arithmetic_mig_2_01, deterministic(Mig == 2)) :-
+	test(interval_arithmetic_mig_2_01, deterministic(Mig == 0)) :-
 		new(-3, 2, X),
 		mig(X, Mig).
 
