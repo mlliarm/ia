@@ -36,16 +36,21 @@ jobs:
           sudo snap install swi-prolog
           echo Downloading GNU-Prolog
           sudo wget http://gprolog.org/gprolog-1.5.0.tar.gz
+          pwd
+          ls -l
           echo Unziping GNU-Prolog
           sudo tar -xzvf ./gprolog-1.5.0.tar.gz
+          ls -l
           echo Building and installing GNU-Prolog
-          sudo cd ./gprolog-1.5.0/src && sudo make && sudo make install
+          cd ./gprolog-1.5.0/src && make && sudo make install
           echo SWI-Prolog version
           swipl --version
           echo GNU-Prolog version
           gprolog --version
           echo Downloading Logtalk v.3.52-0-1
           sudo wget https://logtalk.org/files/logtalk_3.52.0-1_all.deb
+          pwd
+          ls -l
           echo Installing Logtalk
           sudo dpgk -i ./logtalk_3.52.0-1_all.deb
           echo Running tests against SWI-Prolog
