@@ -33,6 +33,7 @@
 		new/3,
 		is_in/2,
 		add/3,
+		add_n/3,
 		sub/3,
 		mul/3,
 		(div)/3,
@@ -79,6 +80,16 @@
 		new(1, 2, X),
 		new(3, 4, Y),
 		add(X, Y, Sum),
+		Sum == (6, 7).
+
+	% add_n/3 tests
+	test(interval_arithmetic_add_n_3_01, deterministic(Sum == (4, 5))) :-
+		new(3, 4, Y),
+		add_n(1, Y, Sum).
+
+	test(interval_arithmetic_add_n_3_02, fail) :-
+		new(3, 4, Y),
+		add_n(1, Y, Sum),
 		Sum == (6, 7).
 
 	% sub/3 tests

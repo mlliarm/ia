@@ -80,6 +80,12 @@
 		Zb is Xb + Yb,
 		new(Za, Zb, Sum).
 
+	% add/3, adds a number and an interval.
+	add_n(N, (Xa, Xb), Sum) :-
+		Za is N + Xa,
+		Zb is N + Xb,
+		new(Za, Zb, Sum).
+
 	% subtract/3, subtracts two intervals.
 	subtract((Xa, Xb), (Ya, Yb), Sub) :-
 		Za is Xa - Yb,

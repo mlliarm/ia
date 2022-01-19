@@ -91,6 +91,13 @@
 		argnames is ['Interval1', 'Interval2', 'Sum']
 	]).
 
+	:- public(add_n/3).
+	:- mode(add_n(@number, @interval, -interval), zero_or_one).
+	:- info(add_n/3, [
+		comment is 'Adds a number and an interval.',
+		argnames is ['Number', 'Interval', 'Sum']
+	]).
+
 	:- public(subtract/3).
 	:- mode(subtract(@interval, @interval, -interval), zero_or_one).
 	:- info(subtract/3, [
