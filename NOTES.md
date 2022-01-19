@@ -56,23 +56,212 @@ To run the tests type:
 
 All examples have been taken from the book of R. E. Moore et al (see the first reference).
 
+Also, in all the example it's assume that the library `ia` has already been imported in the REPL session, as mentioned earlier.
+
 #### 1. Introduction
-- TBD
+- The need for creating a system that bounds the solutions of algebraic equations is pretty old. 
+  - As we read in [Mathworld](https://mathworld.wolfram.com/Pi.html), Archimedes used a bounding method to estimate `pi`, by circumscribing and inscribing `6*2^n`-gons on a circle using the [Archimedes algorithm](https://mathworld.wolfram.com/ArchimedesAlgorithm.html). Using `n = 4` (a 96-gon), Archimedes obtained a lower bound of `3 + (10/71)`, and an upper bound of `3 + (1/7)`, In other words, Archimedes by doing so he created the interval named `PI` which was equal to `[3 + (10/71), 3 + (1/7)]`. Let's use Logtalk to calculate how much this is, as a first example of using the library.
+
+  ```logtalk
+  ?- Pi_low is 3 + 10/71, Pi_high is 3 + 1/7, 
+        interval_arithmetic::new(Pi_low, Pi_high, PI), 
+        interval_arithmetic::mig(PI, Mignitude), interval_arithmetic::mag(PI, Magnitude), 
+        interval_arithmetic::wid(PI, Width), interval_arithmetic::mid(PI, Midpoint).
+  ```
+  The output is:
+
+  ```
+Pi_low = Mignitude, Mignitude = 3.140845070422535,
+Pi_high = Magnitude, Magnitude = 3.142857142857143,
+PI =  (3.140845070422535, 3.142857142857143),
+Width = 0.00201207243460777,
+Midpoint = 3.141851106639839.
+  ```
+
+  So we see that the midpoint of the interval that Archimedes created with his ingenious method is `(3.140845070422535, 3.142857142857143)`, and the midpoint of that interval (the center of it) is `3.141851106639839`. We can calculate how far this midpoint is from the value of pi that can be calculated from the trigonometric functions such as the cosine:
+
+  ```logtalk
+  ?- acos(-1, Pi_swipl), abs(3.141851106639839 - Pi_swipl, Diff), Diff_perc is 100*Diff.
+Pi_swipl = 3.141592653589793,
+Diff = 0.0002584530500460147,
+Diff_perc = 0.02584530500460147.
+  ```
+
+So we can notice the interesting result that even if the `Width` of the interval we calculated above is about `0.002`, the real difference of the midpoint of the interval from the value of Pi we can calulate from the internal functions of our backend Prolog (in this example I've used SWI-Prolog as a backend), is ten times smaller, `0.0002`. 
+
+- A last simple example we'll see here is the `is_in` predicate. This predicate is of arity two, `is_in/2`, which means that it has two arguments. The first argument is a number `N` and the second argument an interval `Interval`. It returns a boolean, so to speak, which means that it succeeds when the number `N` is enclosed in `Interval` and fails when it's not. An example:
+
+```logtalk
+?- acos(-1, Machine_PI), interval_arithmetic::is_in(Machine_PI, (1,2)).
+false.
+```
+
+We see that the above query `failes`, because the number `Machine_PI` (we saw earlier that it is `3.141592653589793`) is not enclosed inside the closed interval `(1,2)`. 
+
+Now if we do a similar query but for a different interval:
+
+```logtalk
+?- PI_interval = (3.140845070422535, 3.142857142857143), acos(-1, Machine_PI), interval_arithmetic::is_in(Machine_PI, (1,2)).
+PI_interval =  (3.140845070422535, 3.142857142857143),
+Machine_PI = 3.141592653589793.
+```
+
+We see that this time the query didn't through out a `fail`, and thus it has succeded, plus we can see the values of `PI_interval` and `Machine_PI`.
+
+The symbols used to denote the interval shouldn't confuse you. I know that in mathematics an open interval for numbers between `a` and `b` is written as `(a,b)` or `]a,b[`, but in Prolog we're using the parentheses as tuples.
+
+This library, and interval arithmetic in general, operates in closed intervals only. So, whenever we type `(a,b)` using `ia`, we should think that such intervals mathematically are written as `[a,b]`, that is, they are closed intervals.
 
 #### 2. The Interval Arithmetic System
-- TBD
+- As mentioned earlier, in interval arithmetic we work only with closed intervals. So mathematically an interval `[a,b]` in interval arithmetic is defined as: `[a,b] = {x \in \R: a <= x <= b}`. Which pretty much defines the interval contructively saying that it's the set where every element is between `a` and `b` both included.
+- This library also supports what is called `degenerate intervals`. This means that you can write `(1,1)`, and use the predicates defined by this library to calculate things. Such intervals pretty much substitute the numbers used in equations such as `2 + (1,1)`, so that one gets always an interval as a result. Some examples:
 
-#### 3. First Applications
-- TBD
+```logtalk
+?- Deg = (1,1), interval_arithmetic::wid(Deg, Width).
+Deg =  (1, 1),
+Width = 0.
+```
+
+So we just saw that a degenerate interval has width zero, something that is apparent from the look of it. But can we do any other operations with it?
+
+How about doing addition, with a second interval `(1,2)`?
+
+```logatalk
+?- Deg = (1,1), Int2 = (1,2), interval_arithmetic::add(Deg, Int2, Sum).
+Deg =  (1, 1),
+Int2 =  (1, 2),
+Sum =  (2, 3).
+```
+
+Let's use the predicate `add_n/3`, that is for adding numbers to intervals:
+
+```logtalk
+?- Int = (1,2), interval_arithmetic::add_n(1, Int, Sum).
+Int =  (1, 2),
+Sum =  (2, 3).
+```
+
+Let's calculate the midpoint of the degenerate interval `(1,1)`:
+
+```logtalk
+?- interval_arithmetic::mid((1,1), Midpoint).
+Midpoint = 1.0.
+```
+As expected, the midpoint is the same number.
+
+Another interesting predicate we can test is the `rad/2`, that calculates the radius of an interval. We can prove experimentally that `rad(X) = wid(X)/2`:
+
+```logtalk
+?- interval_arithmetic::wid((1,3), Wid), interval_arithmetic::rad((1, 3), Rad).
+Wid = 2,
+Rad = 1.0.
+```
+
+We can also subtract two intervals:
+
+```logtalk
+?- X = (1,2), Y = (2, 3), interval_arithmetic::sub(X, Y, Sub).
+X =  (1, 2),
+Y =  (2, 3),
+Sub =  (-2, 0).
+```
+
+We can multiply two intervals:
+
+```logtalk
+?- X = (1,2), Y = (2, 3), interval_arithmetic::mul(X, Y, Mul).
+X =  (1, 2),
+Y =  (2, 3),
+Sub =  (2, 6).
+```
+
+Calculate the magnitude (absolute value) of an interval:
+
+```logtalk
+?- X = (1,2), interval_arithmetic::mag(X, Mag).
+X =  (1, 2),
+Mag = 2.
+```
+
+Calculate the mignitude of an interval:
+
+```logtalk
+?- X = (1,2), interval_arithmetic::mig(X, Mig).
+X =  (1, 2),
+Mig = 1.
+```
+
+But let's see what happens when zero is included in the interval:
+
+```logtalk
+?- X = (-1,2), interval_arithmetic::mig(X, Mig).
+X =  (-1, 2),
+Mig = 0.
+```
+
+Finally, we have interval division, X/Y:
+
+```logtalk
+?- X = (1,2), Y = (2, 3), interval_arithmetic::div(X, Y, Div).
+X =  (1, 2),
+Y =  (2, 3),
+Div =  (0.333
+```
+
+But what happens when zero is included in the second interval `Y`, i.e. in the denominator? Can we divide by zero?
+
+```logtalk
+?- X = (1,2), Y = (-2, 3), interval_arithmetic::div(X, Y, Div).
+false.
+```
+
+Nope. In this version of the current implementation dividing by intervals that contain zero isn't supported. We'd like to extend our library to support this feature though, because the mathematical definitions have already been thought of (see Ratz's 1997 paper).
+
+Finally we have two more predicates.
+
+The intersection of two intervals:
+
+```logtalk
+?- X = (1,2), Y = (1.5, 3), interval_arithmetic::inter(X, Y, Inter).
+X =  (1, 2),
+Y =  (1.5, 3),
+Inter =  (1.5, 2).
+```
+
+```logtalk
+?- X = (1,2), Y = (-1, 3), interval_arithmetic::inter(X, Y, Inter).
+X = Inter, Inter =  (1, 2),
+Y =  (-1, 3).
+```
+
+```logtalk
+?- X = (1,2), Y = (3, 4), interval_arithmetic::inter(X, Y, Inter).
+false. % they don't intersect
+```
+
+And the interval hull predicate:
+
+```logtalk
+?- X = (1,2), Y = (-1, 3), interval_arithmetic::hull(X, Y, Inter).
+X =  (1, 2),
+Y = Inter, Inter =  (-1, 3).
+
+?- X = (1,2), Y = (3, 4), interval_arithmetic::hull(X, Y, Inter).
+X =  (1, 2),
+Y =  (3, 4),
+Inter =  (1, 4).
+```
 
 ---
 ## References
 1. R. E. Moore, R. B. Kearfott, M. J. Cloud, Introduction to Interval Analysis, 2009, ([DOI](https://doi.org/10.1137/1.9780898717716)).
 2. E. Hansen, Global Optimization using Interval Analysis, 2003, ([DOI](https://doi.org/10.1201/9780203026922).
 3. A. Neumaier, Interval Methods for Systems of Equations, 1990, ([DOI](https://doi.org/10.1017/CBO9780511526473)).
-4. D. Ratz, Inclusion isotone extended interval arithmetic. A toolbox update, 1997 ([DOI](https://publikationen.bibliothek.kit.edu/67997), [PDF](https://publikationen.bibliothek.kit.edu/67997/2183)).
-5. S. P. Shary, Randomized algorithms in interval global optimization, 2008, ([DOI](https://doi.org/10.1134/S1995423908040083), [PDF from author's site](http://www.nsc.ru/interval/shary/Papers/InRandAlgs.pdf)).
-6. R.B. Kearfott, M.T. Nakao, Arnold Neumaier, S.M. Rump, S. P. Shary, P. Van Hentenryck, Standardized notation in interval analysis, Вычислительные технологии. 2010. Т. 15. № 1. С. 7-13 , ([PDF](https://web.archive.org/web/20220115215222/https://www.tuhh.de/ti3/paper/rump/KeNaNeRuShHe10.pdf),[link to the journal published)](https://web.archive.org/web/20220115215444/http://www.ict.nsc.ru/jct/annotation/1345)).
+4.  L. Jaulin, M. Kieffer, O. Didrit, E. Walter, Applied Interval Analysis, 2001, ([Amazon.com](https://www.amazon.com/Applied-Interval-Analysis-Luc-Jaulin/dp/1852332190)).
+5. S. P. Shary,  Finite Dimensional Interval Analysis (Kонечномерный Интервальный Анализ), 2021, ([PDF, 5.2MB](www.nsc.ru/interval/Library/InteBooks/SharyBook.pdf)).
+6. D. Ratz, Inclusion isotone extended interval arithmetic. A toolbox update, 1997 ([DOI](https://publikationen.bibliothek.kit.edu/67997), [PDF](https://publikationen.bibliothek.kit.edu/67997/2183)).
+7. S. P. Shary, Randomized algorithms in interval global optimization, 2008, ([DOI](https://doi.org/10.1134/S1995423908040083), [PDF from author's site](http://www.nsc.ru/interval/shary/Papers/InRandAlgs.pdf)).
+8. R.B. Kearfott, M.T. Nakao, Arnold Neumaier, S.M. Rump, S. P. Shary, P. Van Hentenryck, Standardized notation in interval analysis, Вычислительные технологии. 2010. Т. 15. № 1. С. 7-13 , ([PDF](https://web.archive.org/web/20220115215222/https://www.tuhh.de/ti3/paper/rump/KeNaNeRuShHe10.pdf),[link to the journal published)](https://web.archive.org/web/20220115215444/http://www.ict.nsc.ru/jct/annotation/1345)).
 
 ## Contributors
 See [CONTRIBUTORS](CONTRIBUTORS.md).
