@@ -54,15 +54,15 @@ To run the tests type:
 
 ### Examples
 
-All examples have been taken from the book of R. E. Moore et al (see the first reference).
+All examples have been taken or influenced by the book of R. E. Moore et al (see the first reference).
 
-Also, in all the example it's assume that the library `ia` has already been imported in the REPL session, as mentioned earlier.
+Also, in all the examples it's assumed that the library `ia` has already been imported in the REPL session, as mentioned earlier.
 
 #### 1. Introduction
 - The need for creating a system that bounds the solutions of algebraic equations is pretty old. 
   - As we read in [Mathworld](https://mathworld.wolfram.com/Pi.html), Archimedes used a bounding method to estimate `pi`, by circumscribing and inscribing `6*2^n`-gons on a circle using the [Archimedes algorithm](https://mathworld.wolfram.com/ArchimedesAlgorithm.html). Using `n = 4` (a 96-gon), Archimedes obtained a lower bound of `3 + (10/71)`, and an upper bound of `3 + (1/7)`, In other words, Archimedes by doing so he created the interval named `PI` which was equal to `[3 + (10/71), 3 + (1/7)]`. Let's use Logtalk to calculate how much this is, as a first example of using the library.
 
-  ```logtalk
+    ```logtalk
     ?- Pi_low is 3 + 10/71, Pi_high is 3 + 1/7, 
         interval_arithmetic::new(Pi_low, Pi_high, PI), 
         interval_arithmetic::mig(PI, Mignitude), interval_arithmetic::mag(PI, Magnitude), 
@@ -122,7 +122,7 @@ Also, in all the example it's assume that the library `ia` has already been impo
 
     How about doing addition, with a second interval `(1,2)`?
 
-    ```logatalk
+    ```logtalk
     ?- Deg = (1,1), Int2 = (1,2), interval_arithmetic::add(Deg, Int2, Sum).
     Deg =  (1, 1),
     Int2 =  (1, 2),
