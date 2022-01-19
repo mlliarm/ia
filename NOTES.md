@@ -242,10 +242,10 @@ Also, in all the examples it's assumed that the library `ia` has already been im
     X =  (1, 2),
     Y = Inter, Inter =  (-1, 3).
 
-    ?- X = (1,2), Y = (3, 4), interval_arithmetic::hull(X, Y, Inter).
+    ?- X = (1,2), Y = (3, 4), interval_arithmetic::hull(X, Y, Hull).
     X =  (1, 2),
     Y =  (3, 4),
-    Inter =  (1, 4).
+    Hull =  (1, 4).
     ```
 
 ---
