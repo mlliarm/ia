@@ -34,6 +34,7 @@
 		multiply/3  as mul/3,
 		divide/3    as (div)/3,
 		midpoint/2  as mid/2,
+		radius/2    as rad/2,
 		width/2     as wid/2,
 		magnitude/2 as mag/2,
 		mignitude/2 as mig/2,
@@ -51,6 +52,9 @@
 
 	mid(Interval, Midpoint) :-
 		midpoint(Interval, Midpoint).
+
+	rad(Interval, Radius) :-
+		radius(Interval, Radius).
 
 	wid(Interval, Width) :-
 		width(Interval, Width).
@@ -112,6 +116,10 @@
 	% midpoint/2, calculates the midpoint of an interval (Xa, Xb).
 	midpoint((Xa, Xb), Mid) :-
 		Mid is (Xb + Xa)/2.0.
+
+	% radius/2, calculates the radius of an interval.
+	radius((Xa, Xb), Rad) :-
+		Rad is (Xb - Xa)/2.0.
 
 	% width/2, calculates the width of an interval.
 	width((Xa, Xb), Wid) :-

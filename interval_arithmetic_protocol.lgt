@@ -42,6 +42,13 @@
 		argnames is ['Interval', 'Midpoint']
 	]).
 
+	:- public(radius/2).
+	:- mode(radius(@interval, -number), zero_or_one).
+	:- info(radius/2, [
+		comment is 'Computes the radius of the given interval.',
+		argnames is ['Interval', 'Radius']
+	]).
+
 	:- public(width/2).
 	:- mode(width(@interval, -number), zero_or_one).
 	:- info(width/2, [
