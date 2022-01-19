@@ -33,7 +33,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Installing SWI-Prolog and GNU-Prolog
-          sudo apt install swi-prolog, gprolog
+          sudo apt-get install swi-prolog, gprolog
           echo SWI-Prolog version
           swipl --version
           echo GNU-Prolog version
