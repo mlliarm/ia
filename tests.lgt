@@ -174,6 +174,15 @@
 		mig(X, Mig),
 		Mig == 3.
 
+	test(interval_arithmetic_mig_2_03, deterministic(Mig == 0)) :-
+		new(-3, 2, X),
+		mig(X, Mig).
+
+	test(interval_arithmetic_mig_2_04, fail) :-
+		new(1, 2, X),
+		mig(X, Mig),
+		Mig == 0.
+
 	% inter/3 tests
 	test(interval_arithmetic_inter_3_01, deterministic(Inter == (1, 2))) :-
 		new(1, 2, X),
