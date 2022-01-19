@@ -123,7 +123,12 @@
 
 	% mignitude/2, calculates the mignitude of an interval.
 	mignitude((Xa, Xb), Mig) :-
+		\+ is_in(0, (Xa, Xb)),
 		Mig is min(abs(Xa), abs(Xb)).
+
+	mignitude((Xa, Xb), Mig) :-
+		is_in(0, (Xa, Xb)),
+		Mig is 0.
 
 	% intersection/3, calculates the intersection of two intervals.
 	intersection((Xa, Xb), (Ya, Yb), Inter) :-
