@@ -42,6 +42,13 @@
 		argnames is ['Interval', 'Midpoint']
 	]).
 
+	:- public(radius/2).
+	:- mode(radius(@interval, -number), zero_or_one).
+	:- info(radius/2, [
+		comment is 'Computes the radius of the given interval.',
+		argnames is ['Interval', 'Radius']
+	]).
+
 	:- public(width/2).
 	:- mode(width(@interval, -number), zero_or_one).
 	:- info(width/2, [
@@ -89,6 +96,13 @@
 	:- info(add/3, [
 		comment is 'Adds two intervals.',
 		argnames is ['Interval1', 'Interval2', 'Sum']
+	]).
+
+	:- public(add_n/3).
+	:- mode(add_n(@number, @interval, -interval), zero_or_one).
+	:- info(add_n/3, [
+		comment is 'Adds a number and an interval.',
+		argnames is ['Number', 'Interval', 'Sum']
 	]).
 
 	:- public(subtract/3).

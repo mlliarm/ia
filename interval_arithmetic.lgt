@@ -34,6 +34,7 @@
 		multiply/3  as mul/3,
 		divide/3    as (div)/3,
 		midpoint/2  as mid/2,
+		radius/2    as rad/2,
 		width/2     as wid/2,
 		magnitude/2 as mag/2,
 		mignitude/2 as mig/2,
@@ -51,6 +52,9 @@
 
 	mid(Interval, Midpoint) :-
 		midpoint(Interval, Midpoint).
+
+	rad(Interval, Radius) :-
+		radius(Interval, Radius).
 
 	wid(Interval, Width) :-
 		width(Interval, Width).
@@ -80,6 +84,12 @@
 		Zb is Xb + Yb,
 		new(Za, Zb, Sum).
 
+	% add/3, adds a number and an interval.
+	add_n(N, (Xa, Xb), Sum) :-
+		Za is N + Xa,
+		Zb is N + Xb,
+		new(Za, Zb, Sum).
+
 	% subtract/3, subtracts two intervals.
 	subtract((Xa, Xb), (Ya, Yb), Sub) :-
 		Za is Xa - Yb,
@@ -107,6 +117,10 @@
 	midpoint((Xa, Xb), Mid) :-
 		Mid is (Xb + Xa)/2.0.
 
+	% radius/2, calculates the radius of an interval.
+	radius((Xa, Xb), Rad) :-
+		Rad is (Xb - Xa)/2.0.
+
 	% width/2, calculates the width of an interval.
 	width((Xa, Xb), Wid) :-
 		Wid is Xb - Xa.
@@ -117,7 +131,12 @@
 
 	% mignitude/2, calculates the mignitude of an interval.
 	mignitude((Xa, Xb), Mig) :-
-		Mig is min(abs(Xa), abs(Xb)).
+		\+ is_in(0, (Xa, Xb)),
+		Mig is min(abs(Xa), abs(Xb)),!.
+
+	mignitude((Xa, Xb), Mig) :-
+		is_in(0, (Xa, Xb)),
+		Mig is 0.
 
 	% intersection/3, calculates the intersection of two intervals.
 	intersection((Xa, Xb), (Ya, Yb), Inter) :-

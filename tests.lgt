@@ -33,10 +33,12 @@
 		new/3,
 		is_in/2,
 		add/3,
+		add_n/3,
 		sub/3,
 		mul/3,
 		(div)/3,
 		mid/2,
+		rad/2,
 		wid/2,
 		mag/2,
 		mig/2,
@@ -79,6 +81,16 @@
 		new(1, 2, X),
 		new(3, 4, Y),
 		add(X, Y, Sum),
+		Sum == (6, 7).
+
+	% add_n/3 tests
+	test(interval_arithmetic_add_n_3_01, deterministic(Sum == (4, 5))) :-
+		new(3, 4, Y),
+		add_n(1, Y, Sum).
+
+	test(interval_arithmetic_add_n_3_02, fail) :-
+		new(3, 4, Y),
+		add_n(1, Y, Sum),
 		Sum == (6, 7).
 
 	% sub/3 tests
@@ -133,6 +145,17 @@
 		mid(X, Mid),
 		number::approximately_equal(Mid, 1.3, 0.01).
 
+	% rad/2 tests
+	test(interval_arithmetic_rad_2_01, deterministic) :-
+		new(1, 2, X),
+		rad(X, Rad),
+		number::approximately_equal(Rad, 0.5, 0.01).
+
+	test(interval_arithmetic_rad_2_02, fail) :-
+		new(1, 2, X),
+		rad(X, Rad),
+		number::approximately_equal(Rad, 0.3, 0.01).
+
 	% wid/2 tests
 	test(interval_arithmetic_wid_2_01, deterministic(Wid == 2)) :-
 		new(1, 3, X),
@@ -162,6 +185,15 @@
 		new(-3, 2, X),
 		mig(X, Mig),
 		Mig == 3.
+
+	test(interval_arithmetic_mig_2_03, deterministic(Mig == 0)) :-
+		new(-3, 2, X),
+		mig(X, Mig).
+
+	test(interval_arithmetic_mig_2_04, fail) :-
+		new(1, 2, X),
+		mig(X, Mig),
+		Mig == 0.
 
 	% inter/3 tests
 	test(interval_arithmetic_inter_3_01, deterministic(Inter == (1, 2))) :-
