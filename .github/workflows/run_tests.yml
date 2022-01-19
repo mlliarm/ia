@@ -33,7 +33,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo Installing SWI-Prolog with snap
-          snap install swi-prolog
+          sudo snap install swi-prolog
           echo Downloading GNU-Prolog
           sudo wget http://gprolog.org/gprolog-1.5.0.tar.gz /tmp/
           echo Unziping GNU-Prolog
