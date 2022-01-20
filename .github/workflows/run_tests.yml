@@ -1,8 +1,12 @@
 # Taken from: https://github.com/logtalk-actions/workflows/blob/master/testing_multiple_backends.yml
 # Inspired by: https://github.com/logtalk-actions/setup-logtalk
-name: Testing
+name: Testing across three Prolog backends.
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   test:
