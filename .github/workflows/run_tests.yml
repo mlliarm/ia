@@ -10,36 +10,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-         backend: [eclipse, swi-prolog, gnu-prolog] #, scryer-prolog, b-prolog, tau-prolog, trealla-prolog]
+         os: [ubuntu-18.04, ubuntu-latest, macos-10.15, macos-11]
+         backend: [eclipse, b, gnu, scryer, swi, tau, trealla] #[eclipse, swi-prolog, gnu-prolog] #, scryer-prolog, b-prolog, tau-prolog, trealla-prolog]
+         setup-name: [setup-eclipse, setup-swi-prolog, setup-gnu-prolog, setup-scryer-prolog, setup-b-prolog, setup-tau-prolog, setup-trealla-prolog]
+    name: Logtalk with backend ${{ matrix.backend }} testing on ${{ matrix.os }}.
     steps:
-      - if: matrix.backend == 'eclipse'
-        name: Install backend
-        uses: logtalk-actions/setup-eclipse@master
-        with:
-          eclipse-version: '7.0_54'
-      - if: matrix.backend == 'swi-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-swi-prolog@master
-        with:
-          swi-prolog-version: latest
-      - if: matrix.backend == 'gnu-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-gnu-prolog@master
-        with:
-            gnu-prolog-version: latest
-#
-#       These three exist in Logtalk CI, but fail:
-#            
-#       - if: matrix.backend == 'scryer-prolog'
-#         name: Install backend
-#         uses: logtalk-actions/setup-scryer-prolog@master
-#         with:
-#           scryer-prolog-version: latest
-#       - if: matrix.backend == 'b-prolog'
-#         name: Install backend
-#         uses: logtalk-actions/setup-b-prolog@master
-#         with:
-#           b-prolog-version: latest
+      - uses: actions/checkout@v2
+      - name: Set up Logtalk backend ${{ matrix.backend }}.
+        uses: logtalk-actions/${{ matrix.setup-name }}@master
+          with:
+            version: latest
 #
 #       See issue: https://github.com/logtalk-actions/setup-jiprolog/issues/3 
 #
@@ -48,19 +28,6 @@ jobs:
 #         uses: logtalk-actions/setup-jiprolog@master
 #         with:
 #           jip-prolog-version: latest
-#
-#       These two exist in Logtalk CI, but fail:
-#
-#       - if: matrix.backend == 'tau-prolog'
-#         name: Install backend
-#         uses: logtalk-actions/setup-tau-prolog@master
-#         with:
-#           tau-prolog-version: latest 
-#       - if: matrix.backend == 'trealla-prolog'
-#         name: Install backend
-#         uses: logtalk-actions/setup-trealla-prolog@master
-#         with:
-#           trealla-prolog-version: latest 
       - name: Install Logtalk
         uses: logtalk-actions/setup-logtalk@master
         with:
