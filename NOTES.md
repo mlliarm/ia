@@ -1,8 +1,6 @@
 ________________________________________________________________________
-Copyright 2020-2022 Michail Liarmakopoulos <mlliarm@yandex.com>
-
-Copyright 2020-2022 Paulo Moura <pmoura@logtalk.org>
-
+Copyright 2020-2022 Michail Liarmakopoulos <mlliarm@yandex.com>  
+Copyright 2020-2022 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +46,7 @@ To run the tests type:
 ## Known issues
 - Ciao Prolog (tested with version 1.20.0) cannot be used due to lack of support for the `min/2` and `max/2` arithmetic functions.
 
-## Node coverage
+## Code coverage
 - One (1) entity declared as covered containing 20 clauses.
     - 1 out of 1 entity covered, `100.000000% entity coverage`.
     - 20 out of 20 clauses covered, `100.000000% clause coverage`.
@@ -57,7 +55,7 @@ To run the tests type:
 
 All examples have been taken or influenced by the book of R. E. Moore et al (see the first reference).
 
-Also, in all the examples it's assumed that the library `ia` has already been imported in the REPL session, as mentioned earlier.
+Also, in all the examples it's assumed that the library `ia` has already been loaded in the REPL session, as mentioned earlier.
 
 #### 1. Introduction
 - The need for creating a system that bounds the solutions of algebraic equations is pretty old. 
@@ -65,9 +63,13 @@ Also, in all the examples it's assumed that the library `ia` has already been im
 
     ```logtalk
     ?- Pi_low is 3 + 10/71, Pi_high is 3 + 1/7, 
-        interval_arithmetic::new(Pi_low, Pi_high, PI), 
-        interval_arithmetic::mig(PI, Mignitude), interval_arithmetic::mag(PI, Magnitude), 
-        interval_arithmetic::wid(PI, Width), interval_arithmetic::mid(PI, Midpoint).
+       interval_arithmetic::(
+         new(Pi_low, Pi_high, PI), 
+         mig(PI, Mignitude),
+         mag(PI, Magnitude), 
+         wid(PI, Width),
+         mid(PI, Midpoint)
+       ).
     Pi_low = Mignitude, Mignitude = 3.140845070422535,
     Pi_high = Magnitude, Magnitude = 3.142857142857143,
     PI =  (3.140845070422535, 3.142857142857143),
@@ -78,13 +80,13 @@ Also, in all the examples it's assumed that the library `ia` has already been im
     So we see that the midpoint of the interval that Archimedes created with his ingenious method is `(3.140845070422535, 3.142857142857143)`, and the midpoint of that interval (the center of it) is `3.141851106639839`. We can calculate how far this midpoint is from the value of pi that can be calculated from the trigonometric functions such as the cosine:
 
     ```logtalk
-    ?- acos(-1, Pi_swipl), abs(3.141851106639839 - Pi_swipl, Diff), Diff_perc is 100*Diff.
-    Pi_swipl = 3.141592653589793,
+    ?- Pi is acos(-1), Diff is abs(3.141851106639839 - Pi), Diff_perc is 100*Diff.
+    Pi = 3.141592653589793,
     Diff = 0.0002584530500460147,
     Diff_perc = 0.02584530500460147.
     ```
 
-    So we can notice the interesting result that even if the `Width` of the interval we calculated above is about `0.002`, the real difference of the midpoint of the interval from the value of Pi we can calulate from the internal functions of our backend Prolog (in this example I've used SWI-Prolog as a backend), is ten times smaller, `0.0002`. 
+    So we can notice the interesting result that even if the `Width` of the interval we calculated above is about `0.002`, the real difference of the midpoint of the interval from the value of Pi we can calculate from the internal functions of our backend Prolog (in this example I've used SWI-Prolog as a backend), is ten times smaller, `0.0002`. 
 
 - A last simple example we'll see here is the `is_in` predicate. This predicate is of arity two, `is_in/2`, which means that it has two arguments. The first argument is a number `N` and the second argument an interval `Interval`. It returns a boolean, so to speak, which means that it succeeds when the number `N` is enclosed in `Interval` and fails when it's not. An example:
 
@@ -93,25 +95,27 @@ Also, in all the examples it's assumed that the library `ia` has already been im
     false.
     ```
 
-    We see that the above query `failes`, because the number `Machine_PI` (we saw earlier that it is `3.141592653589793`) is not enclosed inside the closed interval `(1,2)`. 
+    We see that the above query fails as the number `Machine_PI` (we saw earlier that it is `3.141592653589793`) is not enclosed inside the closed interval `(1,2)`. 
 
     Now if we do a similar query but for a different interval:
 
     ```logtalk
-    ?- PI_interval = (3.140845070422535, 3.142857142857143), acos(-1, Machine_PI), interval_arithmetic::is_in(Machine_PI, (1,2)).
+    ?- PI_interval = (3.140845070422535, 3.142857142857143),
+       Machine_PI is acos(-1),
+       interval_arithmetic::is_in(Machine_PI, (1,2)).
     PI_interval =  (3.140845070422535, 3.142857142857143),
     Machine_PI = 3.141592653589793.
     ```
 
-    We see that this time the query didn't through out a `fail`, and thus it has succeded, plus we can see the values of `PI_interval` and `Machine_PI`.
+    We see that this time the query didn't through out a `fail`, and thus it has succeeded, plus we can see the values of `PI_interval` and `Machine_PI`.
 
     The symbols used to denote the interval shouldn't confuse you. I know that in mathematics an open interval for numbers between `a` and `b` is written as `(a,b)` or `]a,b[`, but in Prolog we're using the parentheses as tuples.
 
     This library, and interval arithmetic in general, operates in closed intervals only. So, whenever we type `(a,b)` using `ia`, we should think that such intervals mathematically are written as `[a,b]`, that is, they are closed intervals.
 
 #### 2. The Interval Arithmetic System
-- As mentioned earlier, in interval arithmetic we work only with closed intervals. So mathematically an interval `[a,b]` in interval arithmetic is defined as: `[a,b] = {x \in \R: a <= x <= b}`. Which pretty much defines the interval contructively saying that it's the set where every element is between `a` and `b` both included.
-- This library also supports what is called `degenerate intervals`. This means that you can write `(1,1)`, and use the predicates defined by this library to calculate things. Such intervals pretty much substitute the numbers used in equations such as `2 + (1,1)`, so that one gets always an interval as a result. Some examples:
+- As mentioned earlier, in interval arithmetic we work only with closed intervals. So mathematically an interval `[a,b]` in interval arithmetic is defined as: `[a,b] = {x \in \R: a <= x <= b}`. Which pretty much defines the interval constructively saying that it's the set where every element is between `a` and `b` both included.
+- This library also supports what is called *degenerate intervals*. This means that you can write `(1,1)`, and use the predicates defined by this library to calculate things. Such intervals pretty much substitute the numbers used in equations such as `2 + (1,1)`, so that one gets always an interval as a result. Some examples:
 
     ```logtalk
     ?- Deg = (1,1), interval_arithmetic::wid(Deg, Width).
@@ -149,7 +153,7 @@ Also, in all the examples it's assumed that the library `ia` has already been im
     Another interesting predicate we can test is the `rad/2`, that calculates the radius of an interval. We can prove experimentally that `rad(X) = wid(X)/2`:
 
     ```logtalk
-    ?- interval_arithmetic::wid((1,3), Wid), interval_arithmetic::rad((1, 3), Rad).
+    ?- interval_arithmetic::(wid((1,3), Wid),rad((1, 3), Rad)).
     Wid = 2,
     Rad = 1.0.
     ```
