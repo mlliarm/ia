@@ -43,9 +43,14 @@ To run the tests type:
 ## Supported Prolog backends
 - [x] SWI-Prolog (threaded, 64 bits, version 8.5.5-3-gb856d332c-DIRTY), works ([see](https://github.com/mlliarm/ia/issues/10#issuecomment-1009255385)).
 - [x] GNU-Prolog 1.5.0 (64 bits), works ([see](https://github.com/mlliarm/ia/issues/10#issuecomment-1009268552)).
+- [X] ECLiPSe 7.0_54, works.
 
-## Know issues
+## Known issues
 - Ciao Prolog (tested with version 1.20.0) cannot be used due to lack of support for the `min/2` and `max/2` arithmetic functions.
+- B-Prolog v8.1 testing during CI crashes with [this](https://github.com/mlliarm/ia/issues/21) error.
+- Tau-Prolog crashes during CI with [this](https://github.com/mlliarm/ia/issues/20) error and it seems that it cannot see the test suite.
+- Scryer-Prolog v0.8.127 crashes during CI with [this](https://github.com/mlliarm/ia/issues/22) error.
+- Crealla-Prolog latest version crashes during CI with [this](https://github.com/mlliarm/ia/issues/23) error.
 
 ## Node coverage
 - One (1) entity declared as covered containing 20 clauses.
