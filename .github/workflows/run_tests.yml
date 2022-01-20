@@ -11,7 +11,7 @@ jobs:
       fail-fast: false
       matrix:
 #        backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, ciao-prolog, cx-prolog, jip-prolog, lvm-prolog, quintus-prolog, sicstus-prolog, tau-prolog, trealla-prolog, xsb-prolog, yap-prolog]
-         backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, jip-prolog, tau-prolog, trealla-prolog]
+         backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, tau-prolog, trealla-prolog]
     steps:
       - if: matrix.backend == 'eclipse'
         name: Install backend
@@ -48,11 +48,11 @@ jobs:
 #         uses: logtalk-actions/setup-cx-prolog@master
 #         with:
 #           cx-prolog-version: latest
-      - if: matrix.backend == 'jip-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-jiprolog@master
-        with:
-          jip-prolog-version: latest
+#       - if: matrix.backend == 'jip-prolog'
+#         name: Install backend
+#         uses: logtalk-actions/setup-jiprolog@master
+#         with:
+#           jip-prolog-version: latest
 #       - if: matrix.backend == 'lvm-prolog'
 #         name: Install backend
 #         uses: logtalk-actions/setup-lvm-prolog@master
@@ -87,7 +87,10 @@ jobs:
 #         name: Install backend
 #         uses: logtalk-actions/setup-yap-prolog@master
 #         with:
-#           yap-prolog-version: latest                                                   
+#           yap-prolog-version: latest
+#       - name: Set Actions Allow Unsecure Commands
+#         run: |
+#                  echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
       - name: Install Logtalk
         uses: logtalk-actions/setup-logtalk@master
         with:
@@ -97,7 +100,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: Define environment variable for the test results
-        run: echo "::set-env name=EXIT::0"
+        run: echo "DEPLOYMENT_STATUS=skipped" >> $GITHUB_ENV # Taken from https://github.com/JamesIves/github-pages-deploy-action/issues/500#issuecomment-728375894
       - name: Run the application tests
         run: |
           logtalk_tester -p ${{ matrix.backend }} -f xunit -c xml || EXIT=$?
