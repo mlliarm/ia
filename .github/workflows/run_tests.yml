@@ -10,7 +10,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, ciao-prolog, cx-prolog, jip-prolog, lvm-prolog, quintus-prolog, sicstus-prolog, tau-prolog, trealla-prolog, xsb-prolog, yap-prolog]
+#        backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, ciao-prolog, cx-prolog, jip-prolog, lvm-prolog, quintus-prolog, sicstus-prolog, tau-prolog, trealla-prolog, xsb-prolog, yap-prolog]
+         backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, jip-prolog, tau-prolog, trealla-prolog]
     steps:
       - if: matrix.backend == 'eclipse'
         name: Install backend
@@ -37,36 +38,36 @@ jobs:
         uses: logtalk-actions/setup-b-prolog@master
         with:
           b-prolog-version: latest
-      - if: matrix.backend == 'ciao-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-ciao-prolog@master
-        with:
-          ciao-prolog-version: latest
-      - if: matrix.backend == 'cx-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-cx-prolog@master
-        with:
-          cx-prolog-version: latest
+#       - if: matrix.backend == 'ciao-prolog'
+#         name: Install backend
+#         uses: logtalk-actions/setup-ciao-prolog@master
+#         with:
+#           ciao-prolog-version: latest
+#       - if: matrix.backend == 'cx-prolog'
+#         name: Install backend
+#         uses: logtalk-actions/setup-cx-prolog@master
+#         with:
+#           cx-prolog-version: latest
       - if: matrix.backend == 'jip-prolog'
         name: Install backend
-        uses: logtalk-actions/setup-jip-prolog@master
+        uses: logtalk-actions/setup-jiprolog@master
         with:
           jip-prolog-version: latest
-      - if: matrix.backend == 'lvm-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-lvm-prolog@master
-        with:
-          lvm-prolog-version: latest
-      - if: matrix.backend == 'quintus-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-quintus-prolog@master
-        with:
-          quintus-prolog-version: latest 
-      - if: matrix.backend == 'sicstus-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-sicstus-prolog@master
-        with:
-          sicstus-prolog-version: latest 
+#       - if: matrix.backend == 'lvm-prolog'
+#         name: Install backend
+#         uses: logtalk-actions/setup-lvm-prolog@master
+#         with:
+#           lvm-prolog-version: latest
+#       - if: matrix.backend == 'quintus-prolog'
+#         name: Install backend
+#         uses: logtalk-actions/setup-quintus-prolog@master
+#         with:
+#           quintus-prolog-version: latest 
+#       - if: matrix.backend == 'sicstus-prolog'
+#         name: Install backend
+#         uses: logtalk-actions/setup-sicstus-prolog@master
+#         with:
+#           sicstus-prolog-version: latest 
       - if: matrix.backend == 'tau-prolog'
         name: Install backend
         uses: logtalk-actions/setup-tau-prolog@master
@@ -77,16 +78,16 @@ jobs:
         uses: logtalk-actions/setup-trealla-prolog@master
         with:
           trealla-prolog-version: latest 
-      - if: matrix.backend == 'xsb-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-xsb-prolog@master
-        with:
-          xsb-prolog-version: latest 
-      - if: matrix.backend == 'yap-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-yap-prolog@master
-        with:
-          yap-prolog-version: latest                                                   
+#       - if: matrix.backend == 'xsb-prolog'
+#         name: Install backend
+#         uses: logtalk-actions/setup-xsb-prolog@master
+#         with:
+#           xsb-prolog-version: latest 
+#       - if: matrix.backend == 'yap-prolog'
+#         name: Install backend
+#         uses: logtalk-actions/setup-yap-prolog@master
+#         with:
+#           yap-prolog-version: latest                                                   
       - name: Install Logtalk
         uses: logtalk-actions/setup-logtalk@master
         with:
