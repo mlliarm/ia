@@ -13,14 +13,11 @@ jobs:
          os: [ubuntu-18.04, ubuntu-latest, macos-10.15, macos-11]
          backend: [eclipse, b, gnu, scryer, swi, tau, trealla] #[eclipse, swi-prolog, gnu-prolog] #, scryer-prolog, b-prolog, tau-prolog, trealla-prolog]
          setup-name: [setup-eclipse, setup-swi-prolog, setup-gnu-prolog, setup-scryer-prolog, setup-b-prolog, setup-tau-prolog, setup-trealla-prolog]
-         version: latest
     name: Logtalk with backend ${{ matrix.backend }} testing on ${{ matrix.os }}.
     steps:
       - uses: actions/checkout@v2
       - name: Set up Logtalk backend ${{ matrix.backend }}.
         uses: logtalk-actions/${{ matrix.setup-name }}@master
-          with:
-            version: ${{ matrix.version }}
 #       See issue: https://github.com/logtalk-actions/setup-jiprolog/issues/3 
 #
 #       - if: matrix.backend == 'jip-prolog'
