@@ -206,7 +206,7 @@ Also, in all the examples it's assumed that the library `ia` has already been im
     ?- X = (1,2), Y = (2, 3), interval_arithmetic::div(X, Y, Div).
     X =  (1, 2),
     Y =  (2, 3),
-    Div =  (0.333
+    Div =  (0.333).
     ```
 
     But what happens when zero is included in the second interval `Y`, i.e. in the denominator? Can we divide by zero?
@@ -243,9 +243,9 @@ Also, in all the examples it's assumed that the library `ia` has already been im
     And the interval hull predicate:
 
     ```logtalk
-    ?- X = (1,2), Y = (-1, 3), interval_arithmetic::hull(X, Y, Inter).
+    ?- X = (1,2), Y = (-1, 3), interval_arithmetic::hull(X, Y, Hull).
     X =  (1, 2),
-    Y = Inter, Inter =  (-1, 3).
+    Y = Hull, Hull =  (-1, 3).
 
     ?- X = (1,2), Y = (3, 4), interval_arithmetic::hull(X, Y, Hull).
     X =  (1, 2),
@@ -256,13 +256,13 @@ Also, in all the examples it's assumed that the library `ia` has already been im
 ---
 ## References
 1. R. E. Moore, R. B. Kearfott, M. J. Cloud, Introduction to Interval Analysis, 2009, ([DOI](https://doi.org/10.1137/1.9780898717716)).
-2. E. Hansen, Global Optimization using Interval Analysis, 2003, ([DOI](https://doi.org/10.1201/9780203026922).
+2. E. Hansen, Global Optimization using Interval Analysis, 2003, ([DOI](https://doi.org/10.1201/9780203026922)).
 3. A. Neumaier, Interval Methods for Systems of Equations, 1990, ([DOI](https://doi.org/10.1017/CBO9780511526473)).
 4.  L. Jaulin, M. Kieffer, O. Didrit, E. Walter, Applied Interval Analysis, 2001, ([Amazon.com](https://www.amazon.com/Applied-Interval-Analysis-Luc-Jaulin/dp/1852332190)).
 5. S. P. Shary,  Finite Dimensional Interval Analysis (Kонечномерный Интервальный Анализ), 2021, ([PDF, 5.2MB](www.nsc.ru/interval/Library/InteBooks/SharyBook.pdf)).
 6. D. Ratz, Inclusion isotone extended interval arithmetic. A toolbox update, 1997 ([DOI](https://publikationen.bibliothek.kit.edu/67997), [PDF](https://publikationen.bibliothek.kit.edu/67997/2183)).
 7. S. P. Shary, Randomized algorithms in interval global optimization, 2008, ([DOI](https://doi.org/10.1134/S1995423908040083), [PDF from author's site](http://www.nsc.ru/interval/shary/Papers/InRandAlgs.pdf)).
-8. R.B. Kearfott, M.T. Nakao, Arnold Neumaier, S.M. Rump, S. P. Shary, P. Van Hentenryck, Standardized notation in interval analysis, Вычислительные технологии. 2010. Т. 15. № 1. С. 7-13 , ([PDF](https://web.archive.org/web/20220115215222/https://www.tuhh.de/ti3/paper/rump/KeNaNeRuShHe10.pdf),[link to the journal published)](https://web.archive.org/web/20220115215444/http://www.ict.nsc.ru/jct/annotation/1345)).
+8. R.B. Kearfott, M.T. Nakao, Arnold Neumaier, S.M. Rump, S. P. Shary, P. Van Hentenryck, Standardized notation in interval analysis, Вычислительные технологии. 2010. Т. 15. № 1. С. 7-13 , ([PDF](https://web.archive.org/web/20220115215222/https://www.tuhh.de/ti3/paper/rump/KeNaNeRuShHe10.pdf), [link to the journal published)](https://web.archive.org/web/20220115215444/http://www.ict.nsc.ru/jct/annotation/1345)).
 
 ## Contributors
 See [CONTRIBUTORS](CONTRIBUTORS.md).
