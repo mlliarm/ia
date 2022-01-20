@@ -10,8 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-#        backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, ciao-prolog, cx-prolog, jip-prolog, lvm-prolog, quintus-prolog, sicstus-prolog, tau-prolog, trealla-prolog, xsb-prolog, yap-prolog]
-         backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, tau-prolog, trealla-prolog]
+         backend: [eclipse, swi-prolog, gnu-prolog] #, scryer-prolog, b-prolog, tau-prolog, trealla-prolog]
     steps:
       - if: matrix.backend == 'eclipse'
         name: Install backend
@@ -27,70 +26,41 @@ jobs:
         name: Install backend
         uses: logtalk-actions/setup-gnu-prolog@master
         with:
-          gnu-prolog-version: latest
-      - if: matrix.backend == 'scryer-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-scryer-prolog@master
-        with:
-          scryer-prolog-version: latest
-      - if: matrix.backend == 'b-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-b-prolog@master
-        with:
-          b-prolog-version: latest
-#       - if: matrix.backend == 'ciao-prolog'
+            gnu-prolog-version: latest
+#
+#       These three exist in Logtalk CI, but fail:
+#            
+#       - if: matrix.backend == 'scryer-prolog'
 #         name: Install backend
-#         uses: logtalk-actions/setup-ciao-prolog@master
+#         uses: logtalk-actions/setup-scryer-prolog@master
 #         with:
-#           ciao-prolog-version: latest
-#       - if: matrix.backend == 'cx-prolog'
+#           scryer-prolog-version: latest
+#       - if: matrix.backend == 'b-prolog'
 #         name: Install backend
-#         uses: logtalk-actions/setup-cx-prolog@master
+#         uses: logtalk-actions/setup-b-prolog@master
 #         with:
-#           cx-prolog-version: latest
+#           b-prolog-version: latest
+#
+#       See issue: https://github.com/logtalk-actions/setup-jiprolog/issues/3 
+#
 #       - if: matrix.backend == 'jip-prolog'
 #         name: Install backend
 #         uses: logtalk-actions/setup-jiprolog@master
 #         with:
 #           jip-prolog-version: latest
-#       - if: matrix.backend == 'lvm-prolog'
+#
+#       These two exist in Logtalk CI, but fail:
+#
+#       - if: matrix.backend == 'tau-prolog'
 #         name: Install backend
-#         uses: logtalk-actions/setup-lvm-prolog@master
+#         uses: logtalk-actions/setup-tau-prolog@master
 #         with:
-#           lvm-prolog-version: latest
-#       - if: matrix.backend == 'quintus-prolog'
+#           tau-prolog-version: latest 
+#       - if: matrix.backend == 'trealla-prolog'
 #         name: Install backend
-#         uses: logtalk-actions/setup-quintus-prolog@master
+#         uses: logtalk-actions/setup-trealla-prolog@master
 #         with:
-#           quintus-prolog-version: latest 
-#       - if: matrix.backend == 'sicstus-prolog'
-#         name: Install backend
-#         uses: logtalk-actions/setup-sicstus-prolog@master
-#         with:
-#           sicstus-prolog-version: latest 
-      - if: matrix.backend == 'tau-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-tau-prolog@master
-        with:
-          tau-prolog-version: latest 
-      - if: matrix.backend == 'trealla-prolog'
-        name: Install backend
-        uses: logtalk-actions/setup-trealla-prolog@master
-        with:
-          trealla-prolog-version: latest 
-#       - if: matrix.backend == 'xsb-prolog'
-#         name: Install backend
-#         uses: logtalk-actions/setup-xsb-prolog@master
-#         with:
-#           xsb-prolog-version: latest 
-#       - if: matrix.backend == 'yap-prolog'
-#         name: Install backend
-#         uses: logtalk-actions/setup-yap-prolog@master
-#         with:
-#           yap-prolog-version: latest
-#       - name: Set Actions Allow Unsecure Commands
-#         run: |
-#                  echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
+#           trealla-prolog-version: latest 
       - name: Install Logtalk
         uses: logtalk-actions/setup-logtalk@master
         with:
@@ -99,6 +69,9 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 1
+#     - name: Set Actions Allow Unsecure Commands
+#         run: |
+#                  echo "ACTIONS_ALLOW_UNSECURE_COMMANDS=true" >> $GITHUB_ENV
       - name: Define environment variable for the test results
         run: echo "DEPLOYMENT_STATUS=skipped" >> $GITHUB_ENV # Taken from https://github.com/JamesIves/github-pages-deploy-action/issues/500#issuecomment-728375894
       - name: Run the application tests
@@ -111,11 +84,11 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: ${{ matrix.backend }}-xunit-report
-          path: xunit_report.html
+          path: $(basename $GITHUB_REPOSITORY)/xunit_reports/xunit_report.html
       - name: Upload code coverage report
         uses: actions/upload-artifact@master
         with:
           name: ${{ matrix.backend }}-code-coverage-report
-          path: coverage_report.html
+          path: $(basename $GITHUB_REPOSITORY)/coverage_reports/coverage_report.html
       - name: Set workflow exit status after the test results
         run: exit $EXIT
