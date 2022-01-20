@@ -84,11 +84,11 @@ jobs:
         uses: actions/upload-artifact@master
         with:
           name: ${{ matrix.backend }}-xunit-report
-          path: $(basename $GITHUB_REPOSITORY)/xunit_reports/xunit_report.html
+          path: xunit_report.html
       - name: Upload code coverage report
         uses: actions/upload-artifact@master
         with:
           name: ${{ matrix.backend }}-code-coverage-report
-          path: $(basename $GITHUB_REPOSITORY)/coverage_reports/coverage_report.html
+          path: coverage_report.html
       - name: Set workflow exit status after the test results
         run: exit $EXIT
