@@ -6,7 +6,7 @@ on: [push]
 
 jobs:
   test:
-    runs-on: [ubuntu-latest, macOS-latest, windows-latest]
+    runs-on: [ubuntu-latest, macOS-latest]
     strategy:
       fail-fast: false
       matrix:
