@@ -1,63 +1,117 @@
-# This is a basic workflow to help you get started with Actions
+# Taken from: https://github.com/logtalk-actions/workflows/blob/master/testing_multiple_backends.yml
+# Inspired by: https://github.com/logtalk-actions/setup-logtalk
+name: Testing
 
-name: CI
+on: [push]
 
-# Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+  test:
+    runs-on: [ubuntu-latest, macOS-latest, windows-latest]
+    strategy:
+      fail-fast: false
+      matrix:
+        backend: [eclipse, swi-prolog, gnu-prolog, scryer-prolog, b-prolog, ciao-prolog, cx-prolog, jip-prolog, lvm-prolog, quintus-prolog, sicstus-prolog, tau-prolog, trealla-prolog, xsb-prolog, yap-prolog]
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - if: matrix.backend == 'eclipse'
+        name: Install backend
+        uses: logtalk-actions/setup-eclipse@master
+        with:
+          eclipse-version: '7.0_54'
+      - if: matrix.backend == 'swi-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-swi-prolog@master
+        with:
+          swi-prolog-version: latest
+      - if: matrix.backend == 'gnu-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-gnu-prolog@master
+        with:
+          gnu-prolog-version: latest
+      - if: matrix.backend == 'scryer-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-scryer-prolog@master
+        with:
+          scryer-prolog-version: latest
+      - if: matrix.backend == 'b-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-b-prolog@master
+        with:
+          b-prolog-version: latest
+      - if: matrix.backend == 'ciao-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-ciao-prolog@master
+        with:
+          ciao-prolog-version: latest
+      - if: matrix.backend == 'cx-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-cx-prolog@master
+        with:
+          cx-prolog-version: latest
+      - if: matrix.backend == 'jip-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-jip-prolog@master
+        with:
+          jip-prolog-version: latest
+      - if: matrix.backend == 'lvm-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-lvm-prolog@master
+        with:
+          lvm-prolog-version: latest
+      - if: matrix.backend == 'quintus-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-quintus-prolog@master
+        with:
+          quintus-prolog-version: latest 
+      - if: matrix.backend == 'sicstus-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-sicstus-prolog@master
+        with:
+          sicstus-prolog-version: latest 
+      - if: matrix.backend == 'tau-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-tau-prolog@master
+        with:
+          tau-prolog-version: latest 
+      - if: matrix.backend == 'trealla-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-trealla-prolog@master
+        with:
+          trealla-prolog-version: latest 
+      - if: matrix.backend == 'xsb-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-xsb-prolog@master
+        with:
+          xsb-prolog-version: latest 
+      - if: matrix.backend == 'yap-prolog'
+        name: Install backend
+        uses: logtalk-actions/setup-yap-prolog@master
+        with:
+          yap-prolog-version: latest                                                   
+      - name: Install Logtalk
+        uses: logtalk-actions/setup-logtalk@master
+        with:
+          logtalk-version: git
+      - name: Checkout Logtalk application to be tested
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Define environment variable for the test results
+        run: echo "::set-env name=EXIT::0"
+      - name: Run the application tests
         run: |
-          echo Installing SWI-Prolog with snap
-          sudo snap install swi-prolog
-          echo Downloading GNU-Prolog
-          sudo wget http://gprolog.org/gprolog-1.5.0.tar.gz
-          pwd
-          ls -l
-          echo Unziping GNU-Prolog
-          sudo tar -xzvf ./gprolog-1.5.0.tar.gz
-          ls -l
-          echo Building and installing GNU-Prolog
-          cd ./gprolog-1.5.0/src && make && sudo make install
-          echo SWI-Prolog version
-          swipl --version
-          echo GNU-Prolog version
-          gprolog --version
-          echo Downloading Logtalk v.3.52-0-1
-          sudo wget https://logtalk.org/files/logtalk_3.52.0-1_all.deb
-          pwd
-          ls -l
-          echo Installing Logtalk
-          sudo dpgk -i ./logtalk_3.52.0-1_all.deb
-          echo Running tests against SWI-Prolog
-          swilgt -l tester.lgt
-          halt.
-          echo Running tests against GNU-Prolog
-          gplgt --consult-file tester.lgt
-          halt.
-          echo Finished tests.
-          
+          logtalk_tester -p ${{ matrix.backend }} -f xunit -c xml || EXIT=$?
+          xunit-viewer --results=xunit_report.xml --output=xunit_report.html
+          xsltproc --stringparam prefix work/$(basename $GITHUB_REPOSITORY)/$(basename $GITHUB_REPOSITORY)/ --stringparam url https://github.com/$GITHUB_REPOSITORY/tree/$GITHUB_SHA -o coverage_report.html coverage_report.xml
+          echo "EXIT=$EXIT" >> $GITHUB_ENV
+      - name: Upload xUnit report
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ matrix.backend }}-xunit-report
+          path: xunit_report.html
+      - name: Upload code coverage report
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ matrix.backend }}-code-coverage-report
+          path: coverage_report.html
+      - name: Set workflow exit status after the test results
+        run: exit $EXIT
