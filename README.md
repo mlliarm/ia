@@ -25,4 +25,4 @@ An interval arithmetic library in Logtalk.
 
 Please see [NOTES.md](https://github.com/mlliarm/ia/blob/main/NOTES.md).
 
-Thanks !
+Thank you.
