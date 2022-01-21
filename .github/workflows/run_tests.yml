@@ -12,7 +12,7 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
          backend: [eclipse, swi-prolog, gnu-prolog]
          os: [ubuntu-latest]
