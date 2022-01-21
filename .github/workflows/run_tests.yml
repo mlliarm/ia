@@ -10,14 +10,13 @@ on:
 
 jobs:
   test:
-    runs-on: self-hosted #ubuntu-latest # ${{ matrix.os }}
+    runs-on: self-hosted
     strategy:
       fail-fast: true
       matrix:
          backend: [eclipse, swi-prolog, gnu-prolog]
-         #os: [ubuntu-latest, macos-latest, windows-latest]   # Generalize to more OSs in the future if needed.
+         #os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
-       # Just run on one backend. Already tested the other two backends locally.
        - if: matrix.backend == 'eclipse'
          name: Install backend
          uses: logtalk-actions/setup-eclipse@master
