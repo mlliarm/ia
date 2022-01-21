@@ -72,12 +72,12 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
        ).
     Pi_low = Mignitude, Mignitude = 3.140845070422535,
     Pi_high = Magnitude, Magnitude = 3.142857142857143,
-    PI =  (3.140845070422535, 3.142857142857143),
+    PI =  i(3.140845070422535, 3.142857142857143),
     Width = 0.00201207243460777,
     Midpoint = 3.141851106639839.
     ```
 
-    So we see that the midpoint of the interval that Archimedes created with his ingenious method is `(3.140845070422535, 3.142857142857143)`, and the midpoint of that interval (the center of it) is `3.141851106639839`. We can calculate how far this midpoint is from the value of pi that can be calculated from the trigonometric functions such as the cosine:
+    So we see that the midpoint of the interval that Archimedes created with his ingenious method is `i(3.140845070422535, 3.142857142857143)`, and the midpoint of that interval (the center of it) is `3.141851106639839`. The 'i' shows that this isn't just a tuple, but an interval data structure. We can calculate how far this midpoint is from the value of pi that can be calculated from the trigonometric functions such as the cosine:
 
     ```logtalk
     ?- Pi is acos(-1), Diff is abs(3.141851106639839 - Pi), Diff_perc is 100*Diff.
@@ -86,66 +86,66 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     Diff_perc = 0.02584530500460147.
     ```
 
-    So we can notice the interesting result that even if the `Width` of the interval we calculated above is about `0.002`, the real difference of the midpoint of the interval from the value of Pi we can calculate from the internal functions of our backend Prolog (in this example I've used SWI-Prolog as a backend), is ten times smaller, `0.0002`. 
+    So we can notice the interesting result that even if the `Width` of the interval we calculated above is about `0.002`, the real difference of the midpoint of the interval from the value of Pi we can calculate from the internal functions of our backend Prolog (in this example I've used SWI-Prolog as a backend), is ten times smaller, `0.0002`, about `0.02%`. 
 
 - A last simple example we'll see here is the `is_in` predicate. This predicate is of arity two, `is_in/2`, which means that it has two arguments. The first argument is a number `N` and the second argument an interval `Interval`. It returns a boolean, so to speak, which means that it succeeds when the number `N` is enclosed in `Interval` and fails when it's not. An example:
 
     ```logtalk
-    ?- acos(-1, Machine_PI), interval_arithmetic::is_in(Machine_PI, (1,2)).
+    ?- acos(-1, Machine_PI), interval_arithmetic::is_in(Machine_PI, i(1,2)).
     false.
     ```
 
-    We see that the above query fails as the number `Machine_PI` (we saw earlier that it is `3.141592653589793`) is not enclosed inside the closed interval `(1,2)`. 
+    We see that the above query fails as the number `Machine_PI` (we saw earlier that it is `3.141592653589793`) is not enclosed inside the closed interval `i(1,2)`. 
 
     Now if we do a similar query but for a different interval:
 
     ```logtalk
-    ?- PI_interval = (3.140845070422535, 3.142857142857143),
+    ?- PI_interval = i(3.140845070422535, 3.142857142857143),
        Machine_PI is acos(-1),
-       interval_arithmetic::is_in(Machine_PI, (1,2)).
-    PI_interval =  (3.140845070422535, 3.142857142857143),
+       interval_arithmetic::is_in(Machine_PI, PI_interval).
+    PI_interval =  i(3.140845070422535, 3.142857142857143),
     Machine_PI = 3.141592653589793.
     ```
 
     We see that this time the query didn't through out a `fail`, and thus it has succeeded, plus we can see the values of `PI_interval` and `Machine_PI`.
 
-    The symbols used to denote the interval shouldn't confuse you. I know that in mathematics an open interval for numbers between `a` and `b` is written as `(a,b)` or `]a,b[`, but in Prolog we're using the parentheses as tuples.
+    The symbols used to denote the interval shouldn't confuse you. I know that in mathematics an open interval for numbers between `a` and `b` is written as `(a,b)` or `]a,b[`, but in Prolog we're using the parentheses as tuples along with the identificator 'i' that shows that the `i(a,b)` isn't a typical tuple, but an interval atom.
 
-    This library, and interval arithmetic in general, operates in closed intervals only. So, whenever we type `(a,b)` using `ia`, we should think that such intervals mathematically are written as `[a,b]`, that is, they are closed intervals.
+    This library, and interval arithmetic in general, operates in closed intervals only. So, whenever we type `i(a,b)` using `ia`, we should think that such intervals mathematically are written as `[a,b]`, that is, they are closed intervals.
 
 #### 2. The Interval Arithmetic System
 - As mentioned earlier, in interval arithmetic we work only with closed intervals. So mathematically an interval `[a,b]` in interval arithmetic is defined as: `[a,b] = {x \in \R: a <= x <= b}`. Which pretty much defines the interval constructively saying that it's the set where every element is between `a` and `b` both included.
-- This library also supports what is called *degenerate intervals*. This means that you can write `(1,1)`, and use the predicates defined by this library to calculate things. Such intervals pretty much substitute the numbers used in equations such as `2 + (1,1)`, so that one gets always an interval as a result. Some examples:
+- This library also supports what is called *degenerate intervals*. This means that you can write `i(1,1)`, and use the predicates defined by this library to calculate things. Such intervals pretty much substitute the numbers used in equations such as `2 + i(1,1)`, so that one gets always an interval as a result. Some examples:
 
     ```logtalk
-    ?- Deg = (1,1), interval_arithmetic::wid(Deg, Width).
-    Deg =  (1, 1),
+    ?- Deg = i(1,1), interval_arithmetic::wid(Deg, Width).
+    Deg =  i(1, 1),
     Width = 0.
     ```
 
     So we just saw that a degenerate interval has width zero, something that is apparent from the look of it. But can we do any other operations with it?
 
-    How about doing addition, with a second interval `(1,2)`?
+    How about doing addition, with a second interval `i(1,2)`?
 
     ```logtalk
-    ?- Deg = (1,1), Int2 = (1,2), interval_arithmetic::add(Deg, Int2, Sum).
-    Deg =  (1, 1),
-    Int2 =  (1, 2),
-    Sum =  (2, 3).
+    ?- Deg = i(1,1), Int2 = i(1,2), interval_arithmetic::add(Deg, Int2, Sum).
+    Deg =  i(1, 1),
+    Int2 =  i(1, 2),
+    Sum =  i(2, 3).
     ```
 
     Let's use the predicate `add_n/3`, that is for adding numbers to intervals:
 
     ```logtalk
-    ?- Int = (1,2), interval_arithmetic::add_n(1, Int, Sum).
-    Int =  (1, 2),
-    Sum =  (2, 3).
+    ?- Int = i(1,2), interval_arithmetic::add_n(1, Int, Sum).
+    Int =  i(1, 2),
+    Sum =  i(2, 3).
     ```
 
     Let's calculate the midpoint of the degenerate interval `(1,1)`:
 
     ```logtalk
-    ?- interval_arithmetic::mid((1,1), Midpoint).
+    ?- interval_arithmetic::mid(i(1,1), Midpoint).
     Midpoint = 1.0.
     ```
     As expected, the midpoint is the same number.
@@ -153,49 +153,51 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     Another interesting predicate we can test is the `rad/2`, that calculates the radius of an interval. We can prove experimentally that `rad(X) = wid(X)/2`:
 
     ```logtalk
-    ?- interval_arithmetic::(wid((1,3), Wid),rad((1, 3), Rad)).
+    ?- interval_arithmetic::(wid(i(1,3), Wid),rad(i(1, 3), Rad)), Wid =:= 2*Rad.
     Wid = 2,
     Rad = 1.0.
     ```
 
+    The above query didn't fail, so this means that every expression of the query was true, so was the last one `Wid =:= 2*Rad`. QED.
+
     We can also subtract two intervals:
 
     ```logtalk
-    ?- X = (1,2), Y = (2, 3), interval_arithmetic::sub(X, Y, Sub).
-    X =  (1, 2),
-    Y =  (2, 3),
-    Sub =  (-2, 0).
+    ?- X = i(1,2), Y = i(2,3), interval_arithmetic::sub(X, Y, Sub).
+    X =  i(1, 2),
+    Y =  i(2, 3),
+    Sub =  i(-2, 0).
     ```
 
     We can multiply two intervals:
 
     ```logtalk
-    ?- X = (1,2), Y = (2, 3), interval_arithmetic::mul(X, Y, Mul).
-    X =  (1, 2),
-    Y =  (2, 3),
-    Sub =  (2, 6).
+    ?- X = i(1,2), Y = i(2,3), interval_arithmetic::mul(X, Y, Mul).
+    X =  i(1, 2),
+    Y =  i(2, 3),
+    Sub =  i(2, 6).
     ```
 
     Calculate the magnitude (absolute value) of an interval:
 
     ```logtalk
-    ?- X = (1,2), interval_arithmetic::mag(X, Mag).
-    X =  (1, 2),
+    ?- X = i(1,2), interval_arithmetic::mag(X, Mag).
+    X =  i(1, 2),
     Mag = 2.
     ```
 
     Calculate the mignitude of an interval:
 
     ```logtalk
-    ?- X = (1,2), interval_arithmetic::mig(X, Mig).
-    X =  (1, 2),
+    ?- X = i(1,2), interval_arithmetic::mig(X, Mig).
+    X =  i(1, 2),
     Mig = 1.
     ```
 
     But let's see what happens when zero is included in the interval:
 
     ```logtalk
-    ?- X = (-1,2), interval_arithmetic::mig(X, Mig).
+    ?- X = i(-1,2), interval_arithmetic::mig(X, Mig).
     X =  (-1, 2),
     Mig = 0.
     ```
@@ -203,16 +205,16 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     Finally, we have interval division, X/Y:
 
     ```logtalk
-    ?- X = (1,2), Y = (2, 3), interval_arithmetic::div(X, Y, Div).
-    X =  (1, 2),
-    Y =  (2, 3),
-    Div =  (0.333).
+    ?- X = i(1,2), Y = i(2,3), interval_arithmetic::div(X, Y, Div).
+    X =  i(1, 2),
+    Y =  i(2, 3),
+    Div = i(0.3333333333333333, 1.0).
     ```
 
     But what happens when zero is included in the second interval `Y`, i.e. in the denominator? Can we divide by zero?
 
     ```logtalk
-    ?- X = (1,2), Y = (-2, 3), interval_arithmetic::div(X, Y, Div).
+    ?- X = i(1,2), Y = i(-2,3), interval_arithmetic::div(X, Y, Div).
     false.
     ```
 
@@ -223,34 +225,34 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     The intersection of two intervals:
 
     ```logtalk
-    ?- X = (1,2), Y = (1.5, 3), interval_arithmetic::inter(X, Y, Inter).
-    X =  (1, 2),
-    Y =  (1.5, 3),
-    Inter =  (1.5, 2).
+    ?- X = i(1,2), Y = i(1.5,3), interval_arithmetic::inter(X, Y, Inter).
+    X =  i(1, 2),
+    Y =  i(1.5, 3),
+    Inter =  i(1.5, 2).
     ```
 
     ```logtalk
-    ?- X = (1,2), Y = (-1, 3), interval_arithmetic::inter(X, Y, Inter).
-    X = Inter, Inter =  (1, 2),
-    Y =  (-1, 3).
+    ?- X = i(1,2), Y = i(-1,3), interval_arithmetic::inter(X, Y, Inter).
+    X = Inter, Inter =  i(1, 2),
+    Y =  i(-1, 3).
     ```
 
     ```logtalk
-    ?- X = (1,2), Y = (3, 4), interval_arithmetic::inter(X, Y, Inter).
+    ?- X = i(1,2), Y = i(3,4), interval_arithmetic::inter(X, Y, Inter).
     false. % they don't intersect
     ```
 
     And the interval hull predicate:
 
     ```logtalk
-    ?- X = (1,2), Y = (-1, 3), interval_arithmetic::hull(X, Y, Hull).
-    X =  (1, 2),
-    Y = Hull, Hull =  (-1, 3).
+    ?- X = i(1,2), Y = i(-1,3), interval_arithmetic::hull(X, Y, Hull).
+    X =  i(1, 2),
+    Y = Hull, Hull =  i(-1, 3).
 
-    ?- X = (1,2), Y = (3, 4), interval_arithmetic::hull(X, Y, Hull).
-    X =  (1, 2),
-    Y =  (3, 4),
-    Hull =  (1, 4).
+    ?- X = i(1,2), Y = i(3,4), interval_arithmetic::hull(X, Y, Hull).
+    X =  i(1, 2),
+    Y =  i(3, 4),
+    Hull =  i(1, 4).
     ```
 
 ---
