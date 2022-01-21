@@ -72,7 +72,7 @@
 		is_in(4, X).
 
 	% add/3 tests
-	test(interval_arithmetic_add_3_01, deterministic(Sum == (4, 6))) :-
+	test(interval_arithmetic_add_3_01, deterministic(Sum == i(4, 6))) :-
 		new(1, 2, X),
 		new(3, 4, Y),
 		add(X, Y, Sum).
@@ -84,7 +84,7 @@
 		Sum == (6, 7).
 
 	% add_n/3 tests
-	test(interval_arithmetic_add_n_3_01, deterministic(Sum == (4, 5))) :-
+	test(interval_arithmetic_add_n_3_01, deterministic(Sum == i(4, 5))) :-
 		new(3, 4, Y),
 		add_n(1, Y, Sum).
 
@@ -94,7 +94,7 @@
 		Sum == (6, 7).
 
 	% sub/3 tests
-	test(interval_arithmetic_sub_3_01, deterministic(Sub == (-3, -1))) :-
+	test(interval_arithmetic_sub_3_01, deterministic(Sub == i(-3, -1))) :-
 		new(1, 2, X),
 		new(3, 4, Y),
 		sub(X, Y, Sub).
@@ -103,10 +103,10 @@
 		new(1, 2, X),
 		new(3, 4, Y),
 		sub(X, Y, Sub),
-		Sub == (5, 6).
+		Sub == i(5, 6).
 
 	% mul/3 tests
-	test(interval_arithmetic_mul_3_01, deterministic(Mul == (3, 8))) :-
+	test(interval_arithmetic_mul_3_01, deterministic(Mul == i(3, 8))) :-
 		new(1, 2, X),
 		new(3, 4, Y),
 		mul(X, Y, Mul).
@@ -115,10 +115,10 @@
 		new(1, 2, X),
 		new(3, 4, Y),
 		mul(X, Y, Mul),
-		Mul == (1, 4).
+		Mul == i(1, 4).
 
 	% (div)/3 tests
-	test(interval_arithmetic_div_3_01, deterministic(Div == (0.2, 0.5))) :-
+	test(interval_arithmetic_div_3_01, deterministic(Div == i(0.2, 0.5))) :-
 		new(1, 2, X),
 		new(4, 5, Y),
 		div(X, Y, Div).
@@ -127,7 +127,7 @@
 		new(1, 2, X),
 		new(4, 5, Y),
 		div(X, Y, Div),
-		Div == (0.2, 0.25).
+		Div == i(0.2, 0.25).
 
 	test(interval_arithmetic_div_3_03, fail) :-
 		new(1, 2, X),
@@ -196,7 +196,7 @@
 		Mig == 0.
 
 	% inter/3 tests
-	test(interval_arithmetic_inter_3_01, deterministic(Inter == (1, 2))) :-
+	test(interval_arithmetic_inter_3_01, deterministic(Inter == i(1, 2))) :-
 		new(1, 2, X),
 		new(0, 4, Y),
 		inter(X, Y, Inter).
@@ -207,12 +207,12 @@
 		inter(X, Y, _).
 
 	% hull/3 tests
-	test(interval_arithmetic_hull_3_01, deterministic(Hull == (1, 4))) :-
+	test(interval_arithmetic_hull_3_01, deterministic(Hull == i(1, 4))) :-
 		new(1, 2, X),
 		new(3, 4, Y),
 		hull(X, Y, Hull).
 
-	test(interval_arithmetic_hull_3_02, deterministic(Hull == (0, 4))) :-
+	test(interval_arithmetic_hull_3_02, deterministic(Hull == i(0, 4))) :-
 		new(1, 2, X),
 		new(0, 4, Y),
 		hull(X, Y, Hull).
