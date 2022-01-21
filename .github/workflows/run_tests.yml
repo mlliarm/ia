@@ -12,10 +12,9 @@ jobs:
   test:
     runs-on: self-hosted
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
          backend: [eclipse, swi-prolog, gnu-prolog]
-         #os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
        - if: matrix.backend == 'eclipse'
          name: Install backend
