@@ -6,7 +6,7 @@ on: [push]
 
 jobs:
   test:
-    runs-on: Newton
+    runs-on: [self-hosted, linux, x64]
     strategy:
       fail-fast: false
       matrix:
