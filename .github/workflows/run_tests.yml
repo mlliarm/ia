@@ -17,20 +17,20 @@ jobs:
         backend: [eclipse, swi-prolog, gnu-prolog]
     steps:
       - if: matrix.backend == 'eclipse'
-          name: Install backend
-          uses: logtalk-actions/setup-eclipse@master
-          with:
-            eclipse-version: '7.0_54'
+        name: Install backend
+        uses: logtalk-actions/setup-eclipse@master
+        with:
+          eclipse-version: '7.0_54'
       - if: matrix.backend == 'swi-prolog'
-          name: Install backend
-          uses: logtalk-actions/setup-swi-prolog@master
-          with:
-            swi-prolog-version: latest
+        name: Install backend
+        uses: logtalk-actions/setup-swi-prolog@master
+        with:
+          swi-prolog-version: latest
       - if: matrix.backend == 'gnu-prolog'
-          name: Install backend
-          uses: logtalk-actions/setup-gnu-prolog@master
-          with:
-            gnu-prolog-version: latest
+        name: Install backend
+        uses: logtalk-actions/setup-gnu-prolog@master
+        with:
+          gnu-prolog-version: latest
       - name: Install Logtalk
         uses: logtalk-actions/setup-logtalk@master
         with:
