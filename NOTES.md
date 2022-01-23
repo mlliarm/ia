@@ -36,7 +36,7 @@ To run the tests type:
 ```
 
 ### Dependencies
-- [x] Logtalk `3.52.0-1`.
+- [x] Logtalk 3.36.0 or later version.
 
 ## Supported Prolog backends
 - [x] SWI-Prolog (threaded, 64 bits, version 8.5.5-3-gb856d332c-DIRTY), works ([see](https://github.com/mlliarm/ia/issues/10#issuecomment-1009255385)).
@@ -77,11 +77,10 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     Midpoint = 3.141851106639839.
     ```
 
-    So we see that the midpoint of the interval that Archimedes created with his ingenious method is `i(3.140845070422535, 3.142857142857143)`, and the midpoint of that interval (the center of it) is `3.141851106639839`. The 'i' shows that this isn't just a tuple, but an interval data structure. We can calculate how far this midpoint is from the value of pi that can be calculated from the trigonometric functions such as the cosine:
+    So we see that the midpoint of the interval that Archimedes created with his ingenious method is `i(3.140845070422535, 3.142857142857143)`, and the midpoint of that interval (the center of it) is `3.141851106639839`. The 'i' shows that this isn't just a tuple, but an interval data structure. We can calculate how far this midpoint is from the value of pi:
 
     ```logtalk
-    ?- Pi is acos(-1), Diff is abs(3.141851106639839 - Pi), Diff_perc is 100*Diff.
-    Pi = 3.141592653589793,
+    ?- Diff is abs(3.141851106639839 - pi), Diff_perc is 100*Diff.
     Diff = 0.0002584530500460147,
     Diff_perc = 0.02584530500460147.
     ```
@@ -91,25 +90,23 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
 - A last simple example we'll see here is the `is_in` predicate. This predicate is of arity two, `is_in/2`, which means that it has two arguments. The first argument is a number `N` and the second argument an interval `Interval`. It returns a boolean, so to speak, which means that it succeeds when the number `N` is enclosed in `Interval` and fails when it's not. An example:
 
     ```logtalk
-    ?- acos(-1, Machine_PI), interval_arithmetic::is_in(Machine_PI, i(1,2)).
+    ?- interval_arithmetic::is_in(pi, i(1,2)).
     false.
     ```
 
-    We see that the above query fails as the number `Machine_PI` (we saw earlier that it is `3.141592653589793`) is not enclosed inside the closed interval `i(1,2)`. 
+    We see that the above query fails as the number pi is not enclosed inside the closed interval `i(1,2)`. 
 
     Now if we do a similar query but for a different interval:
 
     ```logtalk
     ?- PI_interval = i(3.140845070422535, 3.142857142857143),
-       Machine_PI is acos(-1),
-       interval_arithmetic::is_in(Machine_PI, PI_interval).
-    PI_interval =  i(3.140845070422535, 3.142857142857143),
-    Machine_PI = 3.141592653589793.
+       interval_arithmetic::is_in(pi, PI_interval).
+    PI_interval =  i(3.140845070422535, 3.142857142857143).
     ```
 
     We see that this time the query didn't through out a `fail`, and thus it has succeeded, plus we can see the values of `PI_interval` and `Machine_PI`.
 
-    The symbols used to denote the interval shouldn't confuse you. I know that in mathematics an open interval for numbers between `a` and `b` is written as `(a,b)` or `]a,b[`, but in Prolog we're using the parentheses as tuples along with the identificator 'i' that shows that the `i(a,b)` isn't a typical tuple, but an interval atom.
+    The symbols used to denote the interval shouldn't confuse you. I know that in mathematics an open interval for numbers between `a` and `b` is written as `(a,b)` or `]a,b[`, but in Prolog we're using `i/2` compound terms, e.g. `i(a,b)`.
 
     This library, and interval arithmetic in general, operates in closed intervals only. So, whenever we type `i(a,b)` using `ia`, we should think that such intervals mathematically are written as `[a,b]`, that is, they are closed intervals.
 

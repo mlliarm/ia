@@ -23,9 +23,9 @@
 	implements(interval_arithmetic_protocol)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-21,
+		date is 2022-01-23,
 		comment is 'Interval arithmetic library predicates.'
 	]).
 
@@ -69,9 +69,8 @@
 		intersection(Interval1, Interval2, Interval).
 
 	% new/3, creates an interval Interval.
-	new(Start, End, Interval) :-
-		Start =< End,
-		Interval = i(Start, End).
+	new(Start, End, i(Start, End)) :-
+		Start =< End.
 
 	% is_in/2, returns if a number Number is included in a closed interval i(Xa, Xb).
 	is_in(Number, i(Xa, Xb)) :-
