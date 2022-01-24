@@ -44,7 +44,7 @@ jobs:
         run: echo "DEPLOYMENT_STATUS=skipped" >> $GITHUB_ENV # Taken from https://github.com/JamesIves/github-pages-deploy-action/issues/500#issuecomment-728375894
       - name: Run the application tests
         run: |
-          logtalk_tester -p ${{ matrix.backend }} -f xunit -c xml -u "https://github.com/mlliarm/ia/tree/$GITHUB_SHA/" || EXIT=$?
+          logtalk_tester -p ${{ matrix.backend }} -f xunit -c xml -b github:bug -u "https://github.com/mlliarm/ia/tree/$GITHUB_SHA/" || EXIT=$?
           xunit-viewer --results=xunit_report.xml --output=xunit_report.html
           xsltproc --stringparam prefix work/$(basename $GITHUB_REPOSITORY)/$(basename $GITHUB_REPOSITORY)/ --stringparam url https://github.com/$GITHUB_REPOSITORY/tree/$GITHUB_SHA -o coverage_report.html coverage_report.xml
           echo "EXIT=$EXIT" >> $GITHUB_ENV
