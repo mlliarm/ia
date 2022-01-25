@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Michail Liarmakopoulos and Paulo Moura',
-		date is 2022-01-23,
+		date is 2022-01-25,
 		comment is 'Interval arithmetic library predicates.'
 	]).
 
