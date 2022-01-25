@@ -47,9 +47,9 @@ To run the tests type:
 - Ciao Prolog (tested with version 1.20.0) cannot be used due to lack of support for the `min/2` and `max/2` arithmetic functions.
 
 ## Code coverage
-- One (1) entity declared as covered containing 20 clauses.
+- One (1) entity declared as covered containing 24 clauses.
     - 1 out of 1 entity covered, `100.000000% entity coverage`.
-    - 20 out of 20 clauses covered, `100.000000% clause coverage`.
+    - 24 out of 24 clauses covered, `100.000000% clause coverage`.
 
 ### Examples
 
