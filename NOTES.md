@@ -104,7 +104,7 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     PI_interval =  i(3.140845070422535, 3.142857142857143).
     ```
 
-    We see that this time the query didn't through out a `fail`, and thus it has succeeded, plus we can see the values of `PI_interval` and `Machine_PI`.
+    We see that this time the query didn't through out a `fail`, and thus it has succeeded, plus we can see the value of `PI_interval`.
 
     The symbols used to denote the interval shouldn't confuse you. I know that in mathematics an open interval for numbers between `a` and `b` is written as `(a,b)` or `]a,b[`, but in Prolog we're using `i/2` compound terms, e.g. `i(a,b)`.
 
@@ -172,7 +172,7 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     ?- X = i(1,2), Y = i(2,3), interval_arithmetic::mul(X, Y, Mul).
     X =  i(1, 2),
     Y =  i(2, 3),
-    Sub =  i(2, 6).
+    Mul =  i(2, 6).
     ```
 
     Calculate the magnitude (absolute value) of an interval:
@@ -239,7 +239,7 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     false. % they don't intersect
     ```
 
-    And the interval hull predicate:
+    And the interval hull predicate (a  [more consistent](https://math.stackexchange.com/questions/2092585/is-the-union-of-intervals-an-interval-or-not) definition of a union of two intervals):
 
     ```logtalk
     ?- X = i(1,2), Y = i(-1,3), interval_arithmetic::hull(X, Y, Hull).
