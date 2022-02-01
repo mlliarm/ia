@@ -45,6 +45,7 @@ To run the tests type:
 
 ## Known issues
 - Ciao Prolog (tested with version 1.20.0) cannot be used due to lack of support for the `min/2` and `max/2` arithmetic functions.
+- Multiplication intervals over the integers produce wrong results with GNU-Prolog v1.5.0, see [issue #28](https://github.com/mlliarm/ia/issues/28). SWI-Prolog v8.5.5-3-gb856d332c-DIRTY doesn't face this limitation.
 
 ## Code coverage
 - One (1) entity declared as covered containing 24 clauses.
