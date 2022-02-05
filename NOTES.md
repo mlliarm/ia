@@ -105,7 +105,7 @@ Also, in all the examples it's assumed that the library `ia` has already been lo
     PI_interval =  i(3.140845070422535, 3.142857142857143).
     ```
 
-    We see that this time the query didn't through out a `fail`, and thus it has succeeded, plus we can see the value of `PI_interval`.
+    We see that this time the query didn't throw out a `false`, and thus it has succeeded, plus we can see the value of `PI_interval`.
 
     The symbols used to denote the interval shouldn't confuse you. I know that in mathematics an open interval for numbers between `a` and `b` is written as `(a,b)` or `]a,b[`, but in Prolog we're using `i/2` compound terms, e.g. `i(a,b)`.
 
